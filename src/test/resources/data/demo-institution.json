@@ -1,0 +1,38 @@
+{
+  "institutionName": "demoInstitutionName1",
+  "parentOrganization": "demoParentOrganization",
+  "streetAddress": "demoStreetAddress1",
+  "city": "demoCity1",
+  "state": {
+    "id": 1,
+    "value": "State1"
+  },
+  "zip": "demoZip1",
+  "country": {
+    "id": 1,
+    "value": "Country1"
+  },
+  "phone": "demoPhone1",
+  "email": "demoInstitution1@test.com",
+  "description": "demoDescription1",
+  "contacts": [
+    {
+      "firstName": "firstName1",
+      "lastName": "lastName1",
+      "title": "title1",
+      "phoneNumber": "phoneNumber1",
+      "email": "institutionContact1@test.com",
+      "primaryContact": true
+    },
+    {
+      "firstName": "firstName2",
+      "lastName": "lastName2",
+      "title": "title2",
+      "phoneNumber": "phoneNumber2",
+      "email": "institutionContact2@test.com",
+      "primaryContact": false
+    }
+  ],
+  "status": "ACTIVE",
+  "logoPath": "demoLogoPath1"
+}

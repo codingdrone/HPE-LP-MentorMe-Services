@@ -1,0 +1,173 @@
+{
+  "total": 6,
+  "totalPages": 1,
+  "entities": [
+    {
+      "id": 1,
+      "createdOn": 1475251200000,
+      "institutionName": "institutionName1",
+      "parentOrganization": "parentOrganization1",
+      "streetAddress": "streetAddress1",
+      "city": "city1",
+      "state": {
+        "id": 1,
+        "value": "State1"
+      },
+      "zip": "zip1",
+      "country": {
+        "id": 1,
+        "value": "Country1"
+      },
+      "phone": "phone1",
+      "email": "institution1@test.com",
+      "description": "description1",
+      "contacts": [
+        {
+          "id": 1,
+          "title": "title1",
+          "firstName": "firstName1",
+          "lastName": "lastName1",
+          "email": "institutionContact1@test.com",
+          "phoneNumber": "phoneNumber1",
+          "primaryContact": true
+        },
+        {
+          "id": 2,
+          "title": "title2",
+          "firstName": "firstName2",
+          "lastName": "lastName2",
+          "email": "institutionContact2@test.com",
+          "phoneNumber": "phoneNumber2",
+          "primaryContact": false
+        }
+      ],
+      "status": "ACTIVE",
+      "logoPath": "logoPath1"
+    },
+    {
+      "id": 2,
+      "createdOn": 1475337600000,
+      "institutionName": "institutionName2",
+      "parentOrganization": null,
+      "streetAddress": "streetAddress2",
+      "city": "city2",
+      "state": {
+        "id": 2,
+        "value": "State2"
+      },
+      "zip": "zip2",
+      "country": {
+        "id": 2,
+        "value": "Country2"
+      },
+      "phone": "phone2",
+      "email": "institution2@test.com",
+      "description": "description2",
+      "contacts": [
+        {
+          "id": 3,
+          "title": "title3",
+          "firstName": "firstName3",
+          "lastName": "lastName3",
+          "email": "institutionContact3@test.com",
+          "phoneNumber": "phoneNumber3",
+          "primaryContact": true
+        }
+      ],
+      "status": "INACTIVE",
+      "logoPath": "logoPath2"
+    },
+    {
+      "id": 3,
+      "createdOn": 1475424000000,
+      "institutionName": "institutionName3",
+      "parentOrganization": "parentOrganization3",
+      "streetAddress": "streetAddress3",
+      "city": "city3",
+      "state": {
+        "id": 2,
+        "value": "State2"
+      },
+      "zip": "zip3",
+      "country": {
+        "id": 1,
+        "value": "Country1"
+      },
+      "phone": "phone3",
+      "email": "institution3@test.com",
+      "description": "description3",
+      "contacts": [],
+      "status": "ACTIVE",
+      "logoPath": "logoPath2"
+    },
+    {
+      "id": 4,
+      "createdOn": 1475510400000,
+      "institutionName": "institutionName4",
+      "parentOrganization": "parentOrganization4",
+      "streetAddress": "streetAddress4",
+      "city": "city4",
+      "state": {
+        "id": 2,
+        "value": "State2"
+      },
+      "zip": "zip4",
+      "country": {
+        "id": 2,
+        "value": "Country2"
+      },
+      "phone": "phone4",
+      "email": "institution4@test.com",
+      "description": "description4",
+      "contacts": [],
+      "status": "ACTIVE",
+      "logoPath": "logoPath3"
+    },
+    {
+      "id": 5,
+      "createdOn": 1475596800000,
+      "institutionName": "institutionName5",
+      "parentOrganization": "parentOrganization5",
+      "streetAddress": "streetAddress5",
+      "city": "city5",
+      "state": {
+        "id": 2,
+        "value": "State2"
+      },
+      "zip": "zip5",
+      "country": {
+        "id": 1,
+        "value": "Country1"
+      },
+      "phone": "phone5",
+      "email": "institution5@test.com",
+      "description": "description5",
+      "contacts": [],
+      "status": "ACTIVE",
+      "logoPath": "logoPath4"
+    },
+    {
+      "id": 6,
+      "createdOn": 1475683200000,
+      "institutionName": "institutionName6",
+      "parentOrganization": "parentOrganization6",
+      "streetAddress": "streetAddress6",
+      "city": "city6",
+      "state": {
+        "id": 2,
+        "value": "State2"
+      },
+      "zip": "zip6",
+      "country": {
+        "id": 2,
+        "value": "Country2"
+      },
+      "phone": "phone6",
+      "email": "institution6@test.com",
+      "description": "description6",
+      "contacts": [],
+      "status": "ACTIVE",
+      "logoPath": "logoPath5"
+    }
+  ]
+}

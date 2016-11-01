@@ -1,0 +1,8 @@
+<html>
+ <body>
+ <h3>Hi ${user.username}!</h3>
+  <div>
+    Please reset password with token ${forgotPassword.token}.
+  </div>
+  </body>
+ </html>

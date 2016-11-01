@@ -1,0 +1,18 @@
+[
+  {
+    "id": 1,
+    "value": "SYSTEM_ADMIN"
+  },
+  {
+    "id": 2,
+    "value": "INSTITUTION_ADMIN"
+  },
+  {
+    "id": 3,
+    "value": "MENTOR"
+  },
+  {
+    "id": 4,
+    "value": "MENTEE"
+  }
+]

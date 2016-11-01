@@ -1,0 +1,83 @@
+{
+  "username": "demoMentee1",
+  "password": "password",
+  "firstName": "demoMentee1Firstname4",
+  "lastName": "demoMentee1Lastname4",
+  "roles": [
+    {
+      "id": 4,
+      "value": "MENTEE"
+    },
+    {
+      "id": 1,
+      "value": "SYSTEM_ADMIN"
+    }
+  ],
+  "email": "demoMentee1@test.com",
+  "profilePicturePath": "demoMentee1ProfilePicturePath4",
+  "status": "ACTIVE",
+  "institution": {
+    "id": 2
+  },
+  "assignedToInstitution": true,
+  "birthDate": "1999-09-08",
+  "phone": "demoMentee1Phone",
+  "skypeUsername": "demoMentee1SkypeUsername4",
+  "introVideoLink": "demoMentee1IntroVideoLink4",
+  "description": "demoMentee1Description4",
+  "personalInterests": [
+    {
+      "personalInterest": {
+        "id": 1,
+        "value": "PersonalInterest1",
+        "picturePath": "picturePath1",
+        "parentCategory": null
+      },
+      "weight": 1
+    },
+    {
+      "personalInterest": {
+        "id": 2,
+        "value": "PersonalInterest2",
+        "picturePath": "picturePath2",
+        "parentCategory": null
+      },
+      "weight": 2
+    }
+  ],
+  "professionalInterests": [
+    {
+      "professionalInterest": {
+        "id": 1,
+        "value": "ProfessionalInterest1",
+        "picturePath": "picturePath1",
+        "parentCategory": null
+      },
+      "weight": 1
+    },
+    {
+      "professionalInterest": {
+        "id": 2,
+        "value": "ProfessionalInterest2",
+        "picturePath": "picturePath2",
+        "parentCategory": null
+      },
+      "weight": 2
+    }
+  ],
+  "averagePerformanceScore": 0,
+  "familyIncome": 19999.99,
+  "school": "demoMentee1School",
+  "institutionAffiliationCode": {
+    "code": "code2",
+    "institutionId": 2,
+    "used": true
+  },
+  "parentConsent": {
+    "parentName": "parentName1",
+    "signatureFilePath": "signatureFilePath1",
+    "parentEmail": "parentEmail1@test.com",
+    "token": "token1"
+  },
+  "facebookUrl": "demoMentee1FacebookUrl4"
+}

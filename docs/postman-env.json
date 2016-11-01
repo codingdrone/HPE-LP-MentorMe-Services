@@ -1,0 +1,52 @@
+{
+  "id": "0cc8f7fe-47a9-8d7b-6894-9280174783e4",
+  "name": "Living Progress - Build - Mentor ME ",
+  "values": [
+    {
+      "key": "URL",
+      "value": "http://localhost:8080",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "AUTH_HEADER",
+      "value": "X-AUTH-TOKEN",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "SYSTEM_ADMIN_TOKEN",
+      "value": "eyJpZCI6MSwiY3JlYXRlZE9uIjoxNDc1MjUxMjAwMDAwLCJ1c2VybmFtZSI6InRlc3QxIiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lMSIsImxhc3ROYW1lIjoibGFzdG5hbWUxIiwicm9sZXMiOlt7ImlkIjoxLCJ2YWx1ZSI6IlNZU1RFTV9BRE1JTiJ9XSwiZW1haWwiOiJlbWFpbDFAdGVzdC5jb20iLCJwcm9maWxlUGljdHVyZVBhdGgiOiJwcm9maWxlUGljdHVyZVBhdGgxIiwiZXhwaXJlcyI6OTIyMzM3MjAzNjg1NDc3NTgwNywic3RhdHVzIjoiQUNUSVZFIn0.eMIwRoSKTSdIbeZ2h0H_SligobM2aL3dURlj0SmuR4I",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "INSTITUTION_ADMIN_TOKEN",
+      "value": "eyJpZCI6MiwiY3JlYXRlZE9uIjoxNDc1MzM3NjAwMDAwLCJ1c2VybmFtZSI6InRlc3QyIiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lMiIsImxhc3ROYW1lIjoibGFzdG5hbWUyIiwicm9sZXMiOlt7ImlkIjoyLCJ2YWx1ZSI6IklOU1RJVFVUSU9OX0FETUlOIn1dLCJlbWFpbCI6ImVtYWlsMkB0ZXN0LmNvbSIsInByb2ZpbGVQaWN0dXJlUGF0aCI6InByb2ZpbGVQaWN0dXJlUGF0aDIiLCJleHBpcmVzIjo5MjIzMzcyMDM2ODU0Nzc1ODA3LCJzdGF0dXMiOiJBQ1RJVkUifQ.86Rei6RJrg7HM50YTtvgeNPgJmCmfS5cVzXKxLktXMk",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "MENTOR_TOKEN",
+      "value": "eyJpZCI6MywiY3JlYXRlZE9uIjoxNDc1NDI0MDAwMDAwLCJ1c2VybmFtZSI6InRlc3QzIiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lMyIsImxhc3ROYW1lIjoibGFzdG5hbWUzIiwicm9sZXMiOlt7ImlkIjozLCJ2YWx1ZSI6Ik1FTlRPUiJ9XSwiZW1haWwiOiJlbWFpbDNAdGVzdC5jb20iLCJwcm9maWxlUGljdHVyZVBhdGgiOiJwcm9maWxlUGljdHVyZVBhdGgzIiwiZXhwaXJlcyI6OTIyMzM3MjAzNjg1NDc3NTgwNywic3RhdHVzIjoiQUNUSVZFIn0.HyIBaYenrgPLRBZj56iWXaAAfRn8Gra5ewBPjjcswJU",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "MENTEE_TOKEN",
+      "value": "eyJpZCI6NCwiY3JlYXRlZE9uIjoxNDc1NTEwNDAwMDAwLCJ1c2VybmFtZSI6InRlc3Q0IiwiZmlyc3ROYW1lIjoiZmlyc3RuYW1lNCIsImxhc3ROYW1lIjoibGFzdG5hbWU0Iiwicm9sZXMiOlt7ImlkIjo0LCJ2YWx1ZSI6Ik1FTlRFRSJ9XSwiZW1haWwiOiJlbWFpbDRAdGVzdC5jb20iLCJwcm9maWxlUGljdHVyZVBhdGgiOiJwcm9maWxlUGljdHVyZVBhdGg0IiwiZXhwaXJlcyI6OTIyMzM3MjAzNjg1NDc3NTgwNywic3RhdHVzIjoiQUNUSVZFIn0.3lpsaXzpS4j2BgD03emEqN40_wQJeoaY-COx8eCs4kM",
+      "type": "text",
+      "enabled": true
+    },
+    {
+      "key": "EXPIRED_TOKEN",
+      "value": "eyJpZCI6MCwiY3JlYXRlZE9uIjpudWxsLCJ1c2VybmFtZSI6InN5c3RlbSBhZG1pbiIsImZpcnN0TmFtZSI6bnVsbCwibGFzdE5hbWUiOm51bGwsInJvbGVzIjpbeyJpZCI6MCwidmFsdWUiOiJTWVNURU1fQURNSU4ifV0sImVtYWlsIjpudWxsLCJwcm9maWxlUGljdHVyZVBhdGgiOm51bGwsImV4cGlyZXMiOjE0Nzc2MDM0OTA4NTgsInN0YXR1cyI6bnVsbH0.gu9e7fro3XBFNhYzcuzgL3K9psWfobTIrMk4uC-4iEU",
+      "type": "text",
+      "enabled": true
+    }
+  ],
+  "timestamp": 1477613504915,
+  "_postman_variable_scope": "environment",
+  "_postman_exported_at": "2016-10-28T03:11:01.061Z",
+  "_postman_exported_using": "Postman/4.8.0"
+}

@@ -1,0 +1,133 @@
+{
+  "username": "demoMentor1",
+  "password": "password",
+  "firstName": "demoMentorfirst2",
+  "lastName": "demoMentorlast2",
+  "roles": [
+    {
+      "id": 3,
+      "value": "MENTOR"
+    }
+  ],
+  "email": "demoMentor1@test.com",
+  "profilePicturePath": "demoMentorProfilePicturePath1",
+  "status": "ACTIVE",
+  "institution": {
+    "id": 1,
+    "createdOn": 1475251200000,
+    "institutionName": "institutionName1",
+    "parentOrganization": "parentOrganization1",
+    "streetAddress": "streetAddress1",
+    "city": "city1",
+    "state": {
+      "id": 1,
+      "value": "State1"
+    },
+    "zip": "zip1",
+    "country": {
+      "id": 1,
+      "value": "Country1"
+    },
+    "phone": "phone1",
+    "email": "institution1@test.com",
+    "description": "description1",
+    "contacts": [
+      {
+        "id": 1,
+        "title": "title1",
+        "firstName": "firstName1",
+        "lastName": "lastName1",
+        "email": "institutionContact1@test.com",
+        "phoneNumber": "phoneNumber1",
+        "primaryContact": true
+      },
+      {
+        "id": 2,
+        "title": "title2",
+        "firstName": "firstName2",
+        "lastName": "lastName2",
+        "email": "institutionContact2@test.com",
+        "phoneNumber": "phoneNumber2",
+        "primaryContact": false
+      }
+    ],
+    "status": "ACTIVE",
+    "logoPath": "logoPath1"
+  },
+  "assignedToInstitution": false,
+  "birthDate": "1989-09-09",
+  "phone": "demoMentor1Phone1",
+  "skypeUsername": "demoMentor1SkypeUsername1",
+  "introVideoLink": "demoMentor1IntroVideoLink1",
+  "description": "demoMentor1Description1",
+  "personalInterests": [
+    {
+      "personalInterest": {
+        "id": 1,
+        "value": "PersonalInterest1",
+        "picturePath": "picturePath1",
+        "parentCategory": null
+      },
+      "weight": 1
+    },
+    {
+      "personalInterest": {
+        "id": 2,
+        "value": "PersonalInterest2",
+        "picturePath": "picturePath2",
+        "parentCategory": null
+      },
+      "weight": 2
+    }
+  ],
+  "professionalInterests": [
+    {
+      "professionalInterest": {
+        "id": 1,
+        "value": "ProfessionalInterest1",
+        "picturePath": "picturePath1",
+        "parentCategory": null
+      },
+      "weight": 1
+    },
+    {
+      "professionalInterest": {
+        "id": 2,
+        "value": "ProfessionalInterest2",
+        "picturePath": "picturePath2",
+        "parentCategory": null
+      },
+      "weight": 2
+    }
+  ],
+  "averagePerformanceScore": 0,
+  "professionalExperiences": [
+    {
+      "position": "position1",
+      "workLocation": "workLocation1",
+      "startDate": "2016-10-11",
+      "endDate": "2016-10-31",
+      "description": "description1"
+    },
+    {
+      "position": "position2",
+      "workLocation": "workLocation2",
+      "startDate": "2016-11-11",
+      "endDate": "2016-11-30",
+      "description": "description2"
+    }
+  ],
+  "mentorType": "MENTEE_PAIRED",
+  "professionalAreas": [
+    {
+      "id": 3,
+      "value": "ProfessionalConsultantArea3"
+    },
+    {
+      "id": 2,
+      "value": "ProfessionalConsultantArea2"
+    }
+  ],
+  "companyName": "demoMentor1CompanyName1",
+  "linkedInUrl": "demoMentorLinkedInUrl1"
+}

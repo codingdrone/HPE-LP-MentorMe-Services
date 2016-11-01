@@ -1,0 +1,145 @@
+{
+  "id": 4,
+  "createdOn": 1475510400000,
+  "username": "test4",
+  "firstName": "firstname4",
+  "lastName": "lastname4",
+  "roles": [
+    {
+      "id": 4,
+      "value": "MENTEE"
+    }
+  ],
+  "email": "email4@test.com",
+  "profilePicturePath": "profilePicturePath4",
+  "status": "ACTIVE",
+  "institution": {
+    "id": 1,
+    "createdOn": 1475251200000,
+    "institutionName": "institutionName1",
+    "parentOrganization": "parentOrganization1",
+    "streetAddress": "streetAddress1",
+    "city": "city1",
+    "state": {
+      "id": 1,
+      "value": "State1"
+    },
+    "zip": "zip1",
+    "country": {
+      "id": 1,
+      "value": "Country1"
+    },
+    "phone": "phone1",
+    "email": "institution1@test.com",
+    "description": "description1",
+    "contacts": [
+      {
+        "id": 1,
+        "title": "title1",
+        "firstName": "firstName1",
+        "lastName": "lastName1",
+        "email": "institutionContact1@test.com",
+        "phoneNumber": "phoneNumber1",
+        "primaryContact": true
+      },
+      {
+        "id": 2,
+        "title": "title2",
+        "firstName": "firstName2",
+        "lastName": "lastName2",
+        "email": "institutionContact2@test.com",
+        "phoneNumber": "phoneNumber2",
+        "primaryContact": false
+      }
+    ],
+    "status": "ACTIVE",
+    "logoPath": "logoPath1"
+  },
+  "assignedToInstitution": true,
+  "birthDate": "1988-08-01",
+  "phone": "phone1",
+  "skypeUsername": "skypeUsername1",
+  "introVideoLink": "introVideoLink1",
+  "description": "description1",
+  "personalInterests": [
+    {
+      "id": 3,
+      "personalInterest": {
+        "id": 1,
+        "value": "PersonalInterest1",
+        "picturePath": "picturePath1",
+        "parentCategory": null
+      },
+      "weight": 2,
+      "userId": 4
+    },
+    {
+      "id": 4,
+      "personalInterest": {
+        "id": 2,
+        "value": "PersonalInterest2",
+        "picturePath": "picturePath2",
+        "parentCategory": null
+      },
+      "weight": 3,
+      "userId": 4
+    }
+  ],
+  "professionalInterests": [
+    {
+      "id": 3,
+      "professionalInterest": {
+        "id": 1,
+        "value": "ProfessionalInterest1",
+        "picturePath": "picturePath1",
+        "parentCategory": null
+      },
+      "weight": 2,
+      "userId": 4
+    },
+    {
+      "id": 4,
+      "professionalInterest": {
+        "id": 2,
+        "value": "ProfessionalInterest2",
+        "picturePath": "picturePath2",
+        "parentCategory": null
+      },
+      "weight": 3,
+      "userId": 4
+    },
+    {
+      "id": 6,
+      "professionalInterest": {
+        "id": 4,
+        "value": "ProfessionalInterest4",
+        "picturePath": "picturePath4",
+        "parentCategory": {
+          "id": 1,
+          "value": "ProfessionalInterest1",
+          "picturePath": "picturePath1",
+          "parentCategory": null
+        }
+      },
+      "weight": 2,
+      "userId": 4
+    }
+  ],
+  "averagePerformanceScore": 0,
+  "familyIncome": 101.91,
+  "school": "school1",
+  "institutionAffiliationCode": {
+    "id": 1,
+    "code": "code1",
+    "institutionId": 1,
+    "used": true
+  },
+  "parentConsent": {
+    "id": 1,
+    "parentName": "parentName1",
+    "signatureFilePath": "signatureFilePath1",
+    "parentEmail": "parentEmail1@test.com",
+    "token": "token1"
+  },
+  "facebookUrl": "facebookUrl1"
+}

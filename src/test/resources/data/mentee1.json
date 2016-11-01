@@ -1,0 +1,16 @@
+{
+  "id": 1,
+  "createdOn": 1476115200000,
+  "username": "test1",
+  "firstName": "firstname1",
+  "lastName": "lastname1",
+  "roles": [
+    {
+      "id": 1,
+      "value": "SYSTEM_ADMIN"
+    }
+  ],
+  "email": "email1@test.com",
+  "profilePicturePath": "profilePicturePath1",
+  "status": "ACTIVE"
+}

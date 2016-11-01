@@ -1,0 +1,591 @@
+{
+  "total": 6,
+  "totalPages": 1,
+  "entities": [
+    {
+      "id": 4,
+      "createdOn": 1475510400000,
+      "username": "test4",
+      "firstName": "firstname4",
+      "lastName": "lastname4",
+      "roles": [
+        {
+          "id": 4,
+          "value": "MENTEE"
+        }
+      ],
+      "email": "email4@test.com",
+      "profilePicturePath": "profilePicturePath4",
+      "status": "ACTIVE",
+      "institution": {
+        "id": 1,
+        "createdOn": 1475251200000,
+        "institutionName": "institutionName1",
+        "parentOrganization": "parentOrganization1",
+        "streetAddress": "streetAddress1",
+        "city": "city1",
+        "state": {
+          "id": 1,
+          "value": "State1"
+        },
+        "zip": "zip1",
+        "country": {
+          "id": 1,
+          "value": "Country1"
+        },
+        "phone": "phone1",
+        "email": "institution1@test.com",
+        "description": "description1",
+        "contacts": [
+          {
+            "id": 1,
+            "title": "title1",
+            "firstName": "firstName1",
+            "lastName": "lastName1",
+            "email": "institutionContact1@test.com",
+            "phoneNumber": "phoneNumber1",
+            "primaryContact": true
+          },
+          {
+            "id": 2,
+            "title": "title2",
+            "firstName": "firstName2",
+            "lastName": "lastName2",
+            "email": "institutionContact2@test.com",
+            "phoneNumber": "phoneNumber2",
+            "primaryContact": false
+          }
+        ],
+        "status": "ACTIVE",
+        "logoPath": "logoPath1"
+      },
+      "assignedToInstitution": true,
+      "birthDate": "1988-08-01",
+      "phone": "phone1",
+      "skypeUsername": "skypeUsername1",
+      "introVideoLink": "introVideoLink1",
+      "description": "description1",
+      "personalInterests": [
+        {
+          "id": 3,
+          "personalInterest": {
+            "id": 1,
+            "value": "PersonalInterest1",
+            "picturePath": "picturePath1",
+            "parentCategory": null
+          },
+          "weight": 2,
+          "userId": 4
+        },
+        {
+          "id": 4,
+          "personalInterest": {
+            "id": 2,
+            "value": "PersonalInterest2",
+            "picturePath": "picturePath2",
+            "parentCategory": null
+          },
+          "weight": 3,
+          "userId": 4
+        }
+      ],
+      "professionalInterests": [
+        {
+          "id": 3,
+          "professionalInterest": {
+            "id": 1,
+            "value": "ProfessionalInterest1",
+            "picturePath": "picturePath1",
+            "parentCategory": null
+          },
+          "weight": 2,
+          "userId": 4
+        },
+        {
+          "id": 4,
+          "professionalInterest": {
+            "id": 2,
+            "value": "ProfessionalInterest2",
+            "picturePath": "picturePath2",
+            "parentCategory": null
+          },
+          "weight": 3,
+          "userId": 4
+        },
+        {
+          "id": 6,
+          "professionalInterest": {
+            "id": 4,
+            "value": "ProfessionalInterest4",
+            "picturePath": "picturePath4",
+            "parentCategory": {
+              "id": 1,
+              "value": "ProfessionalInterest1",
+              "picturePath": "picturePath1",
+              "parentCategory": null
+            }
+          },
+          "weight": 2,
+          "userId": 4
+        }
+      ],
+      "averagePerformanceScore": 0,
+      "familyIncome": 101.91,
+      "school": "school1",
+      "institutionAffiliationCode": {
+        "id": 1,
+        "code": "code1",
+        "institutionId": 1,
+        "used": true
+      },
+      "parentConsent": {
+        "id": 1,
+        "parentName": "parentName1",
+        "signatureFilePath": "signatureFilePath1",
+        "parentEmail": "parentEmail1@test.com",
+        "token": "token1"
+      },
+      "facebookUrl": "facebookUrl1"
+    },
+    {
+      "id": 10,
+      "createdOn": 1476028800000,
+      "username": "test10",
+      "firstName": "firstname10",
+      "lastName": "lastname10",
+      "roles": [
+        {
+          "id": 4,
+          "value": "MENTEE"
+        }
+      ],
+      "email": "email10@test.com",
+      "profilePicturePath": "profilePicturePath10",
+      "status": "ACTIVE",
+      "institution": {
+        "id": 2,
+        "createdOn": 1475337600000,
+        "institutionName": "institutionName2",
+        "parentOrganization": null,
+        "streetAddress": "streetAddress2",
+        "city": "city2",
+        "state": {
+          "id": 2,
+          "value": "State2"
+        },
+        "zip": "zip2",
+        "country": {
+          "id": 2,
+          "value": "Country2"
+        },
+        "phone": "phone2",
+        "email": "institution2@test.com",
+        "description": "description2",
+        "contacts": [
+          {
+            "id": 3,
+            "title": "title3",
+            "firstName": "firstName3",
+            "lastName": "lastName3",
+            "email": "institutionContact3@test.com",
+            "phoneNumber": "phoneNumber3",
+            "primaryContact": true
+          }
+        ],
+        "status": "INACTIVE",
+        "logoPath": "logoPath2"
+      },
+      "assignedToInstitution": false,
+      "birthDate": "1988-08-02",
+      "phone": "phone2",
+      "skypeUsername": "skypeUsername2",
+      "introVideoLink": "introVideoLink2",
+      "description": "description2",
+      "personalInterests": [
+        {
+          "id": 6,
+          "personalInterest": {
+            "id": 4,
+            "value": "PersonalInterest4",
+            "picturePath": "picturePath4",
+            "parentCategory": {
+              "id": 1,
+              "value": "PersonalInterest1",
+              "picturePath": "picturePath1",
+              "parentCategory": null
+            }
+          },
+          "weight": 2,
+          "userId": 10
+        },
+        {
+          "id": 9,
+          "personalInterest": {
+            "id": 2,
+            "value": "PersonalInterest2",
+            "picturePath": "picturePath2",
+            "parentCategory": null
+          },
+          "weight": 2,
+          "userId": 10
+        }
+      ],
+      "professionalInterests": [],
+      "averagePerformanceScore": 1,
+      "familyIncome": 102.92,
+      "school": "school2",
+      "institutionAffiliationCode": {
+        "id": 2,
+        "code": "code2",
+        "institutionId": 2,
+        "used": true
+      },
+      "parentConsent": {
+        "id": 2,
+        "parentName": "parentName2",
+        "signatureFilePath": "signatureFilePath2",
+        "parentEmail": "parentEmail2@test.com",
+        "token": "token2"
+      },
+      "facebookUrl": "facebookUrl2"
+    },
+    {
+      "id": 11,
+      "createdOn": 1476115200000,
+      "username": "test11",
+      "firstName": "firstname11",
+      "lastName": "lastname11",
+      "roles": [
+        {
+          "id": 4,
+          "value": "MENTEE"
+        }
+      ],
+      "email": "email11@test.com",
+      "profilePicturePath": "profilePicturePath11",
+      "status": "INACTIVE",
+      "institution": {
+        "id": 1,
+        "createdOn": 1475251200000,
+        "institutionName": "institutionName1",
+        "parentOrganization": "parentOrganization1",
+        "streetAddress": "streetAddress1",
+        "city": "city1",
+        "state": {
+          "id": 1,
+          "value": "State1"
+        },
+        "zip": "zip1",
+        "country": {
+          "id": 1,
+          "value": "Country1"
+        },
+        "phone": "phone1",
+        "email": "institution1@test.com",
+        "description": "description1",
+        "contacts": [
+          {
+            "id": 1,
+            "title": "title1",
+            "firstName": "firstName1",
+            "lastName": "lastName1",
+            "email": "institutionContact1@test.com",
+            "phoneNumber": "phoneNumber1",
+            "primaryContact": true
+          },
+          {
+            "id": 2,
+            "title": "title2",
+            "firstName": "firstName2",
+            "lastName": "lastName2",
+            "email": "institutionContact2@test.com",
+            "phoneNumber": "phoneNumber2",
+            "primaryContact": false
+          }
+        ],
+        "status": "ACTIVE",
+        "logoPath": "logoPath1"
+      },
+      "assignedToInstitution": true,
+      "birthDate": "1988-08-03",
+      "phone": "phone3",
+      "skypeUsername": "skypeUsername3",
+      "introVideoLink": "introVideoLink3",
+      "description": "description3",
+      "personalInterests": [
+        {
+          "id": 11,
+          "personalInterest": {
+            "id": 4,
+            "value": "PersonalInterest4",
+            "picturePath": "picturePath4",
+            "parentCategory": {
+              "id": 1,
+              "value": "PersonalInterest1",
+              "picturePath": "picturePath1",
+              "parentCategory": null
+            }
+          },
+          "weight": 2,
+          "userId": 11
+        }
+      ],
+      "professionalInterests": [],
+      "averagePerformanceScore": 2,
+      "familyIncome": 103.93,
+      "school": "school3",
+      "institutionAffiliationCode": {
+        "id": 3,
+        "code": "code3",
+        "institutionId": 3,
+        "used": true
+      },
+      "parentConsent": null,
+      "facebookUrl": "facebookUrl3"
+    },
+    {
+      "id": 12,
+      "createdOn": 1476201600000,
+      "username": "test12",
+      "firstName": "firstname12",
+      "lastName": "lastname12",
+      "roles": [
+        {
+          "id": 4,
+          "value": "MENTEE"
+        }
+      ],
+      "email": "email12@test.com",
+      "profilePicturePath": "profilePicturePath12",
+      "status": "ACTIVE",
+      "institution": {
+        "id": 4,
+        "createdOn": 1475510400000,
+        "institutionName": "institutionName4",
+        "parentOrganization": "parentOrganization4",
+        "streetAddress": "streetAddress4",
+        "city": "city4",
+        "state": {
+          "id": 2,
+          "value": "State2"
+        },
+        "zip": "zip4",
+        "country": {
+          "id": 2,
+          "value": "Country2"
+        },
+        "phone": "phone4",
+        "email": "institution4@test.com",
+        "description": "description4",
+        "contacts": [],
+        "status": "ACTIVE",
+        "logoPath": "logoPath3"
+      },
+      "assignedToInstitution": false,
+      "birthDate": "1988-08-04",
+      "phone": "phone4",
+      "skypeUsername": "skypeUsername4",
+      "introVideoLink": "introVideoLink4",
+      "description": "description4",
+      "personalInterests": [],
+      "professionalInterests": [
+        {
+          "id": 10,
+          "professionalInterest": {
+            "id": 4,
+            "value": "ProfessionalInterest4",
+            "picturePath": "picturePath4",
+            "parentCategory": {
+              "id": 1,
+              "value": "ProfessionalInterest1",
+              "picturePath": "picturePath1",
+              "parentCategory": null
+            }
+          },
+          "weight": 2,
+          "userId": 12
+        }
+      ],
+      "averagePerformanceScore": 3,
+      "familyIncome": 104.94,
+      "school": "school4",
+      "institutionAffiliationCode": {
+        "id": 4,
+        "code": "code4",
+        "institutionId": 4,
+        "used": true
+      },
+      "parentConsent": null,
+      "facebookUrl": "facebookUrl4"
+    },
+    {
+      "id": 13,
+      "createdOn": 1476288000000,
+      "username": "test13",
+      "firstName": "firstname13",
+      "lastName": "lastname13",
+      "roles": [
+        {
+          "id": 4,
+          "value": "MENTEE"
+        }
+      ],
+      "email": "email13@test.com",
+      "profilePicturePath": "profilePicturePath13",
+      "status": "ACTIVE",
+      "institution": {
+        "id": 1,
+        "createdOn": 1475251200000,
+        "institutionName": "institutionName1",
+        "parentOrganization": "parentOrganization1",
+        "streetAddress": "streetAddress1",
+        "city": "city1",
+        "state": {
+          "id": 1,
+          "value": "State1"
+        },
+        "zip": "zip1",
+        "country": {
+          "id": 1,
+          "value": "Country1"
+        },
+        "phone": "phone1",
+        "email": "institution1@test.com",
+        "description": "description1",
+        "contacts": [
+          {
+            "id": 1,
+            "title": "title1",
+            "firstName": "firstName1",
+            "lastName": "lastName1",
+            "email": "institutionContact1@test.com",
+            "phoneNumber": "phoneNumber1",
+            "primaryContact": true
+          },
+          {
+            "id": 2,
+            "title": "title2",
+            "firstName": "firstName2",
+            "lastName": "lastName2",
+            "email": "institutionContact2@test.com",
+            "phoneNumber": "phoneNumber2",
+            "primaryContact": false
+          }
+        ],
+        "status": "ACTIVE",
+        "logoPath": "logoPath1"
+      },
+      "assignedToInstitution": true,
+      "birthDate": "1988-08-05",
+      "phone": "phone5",
+      "skypeUsername": "skypeUsername5",
+      "introVideoLink": "introVideoLink5",
+      "description": "description5",
+      "personalInterests": [
+        {
+          "id": 12,
+          "personalInterest": {
+            "id": 4,
+            "value": "PersonalInterest4",
+            "picturePath": "picturePath4",
+            "parentCategory": {
+              "id": 1,
+              "value": "PersonalInterest1",
+              "picturePath": "picturePath1",
+              "parentCategory": null
+            }
+          },
+          "weight": 3,
+          "userId": 13
+        }
+      ],
+      "professionalInterests": [],
+      "averagePerformanceScore": 4,
+      "familyIncome": 105.95,
+      "school": "school5",
+      "institutionAffiliationCode": {
+        "id": 5,
+        "code": "code5",
+        "institutionId": 5,
+        "used": true
+      },
+      "parentConsent": null,
+      "facebookUrl": "facebookUrl5"
+    },
+    {
+      "id": 14,
+      "createdOn": 1476374400000,
+      "username": "test14",
+      "firstName": "firstname14",
+      "lastName": "lastname14",
+      "roles": [
+        {
+          "id": 4,
+          "value": "MENTEE"
+        }
+      ],
+      "email": "email14@test.com",
+      "profilePicturePath": "profilePicturePath14",
+      "status": "ACTIVE",
+      "institution": {
+        "id": 6,
+        "createdOn": 1475683200000,
+        "institutionName": "institutionName6",
+        "parentOrganization": "parentOrganization6",
+        "streetAddress": "streetAddress6",
+        "city": "city6",
+        "state": {
+          "id": 2,
+          "value": "State2"
+        },
+        "zip": "zip6",
+        "country": {
+          "id": 2,
+          "value": "Country2"
+        },
+        "phone": "phone6",
+        "email": "institution6@test.com",
+        "description": "description6",
+        "contacts": [],
+        "status": "ACTIVE",
+        "logoPath": "logoPath5"
+      },
+      "assignedToInstitution": false,
+      "birthDate": "1988-08-06",
+      "phone": "phone6",
+      "skypeUsername": "skypeUsername6",
+      "introVideoLink": "introVideoLink6",
+      "description": "description6",
+      "personalInterests": [],
+      "professionalInterests": [
+        {
+          "id": 11,
+          "professionalInterest": {
+            "id": 4,
+            "value": "ProfessionalInterest4",
+            "picturePath": "picturePath4",
+            "parentCategory": {
+              "id": 1,
+              "value": "ProfessionalInterest1",
+              "picturePath": "picturePath1",
+              "parentCategory": null
+            }
+          },
+          "weight": 3,
+          "userId": 14
+        }
+      ],
+      "averagePerformanceScore": 5,
+      "familyIncome": 106.96,
+      "school": "school6",
+      "institutionAffiliationCode": {
+        "id": 6,
+        "code": "code6",
+        "institutionId": 6,
+        "used": true
+      },
+      "parentConsent": null,
+      "facebookUrl": "facebookUrl6"
+    }
+  ]
+}

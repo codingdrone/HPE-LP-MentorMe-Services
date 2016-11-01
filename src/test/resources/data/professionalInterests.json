@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1,
+    "value": "ProfessionalInterest1",
+    "picturePath": "picturePath1",
+    "parentCategory": null
+  },
+  {
+    "id": 2,
+    "value": "ProfessionalInterest2",
+    "picturePath": "picturePath2",
+    "parentCategory": null
+  },
+  {
+    "id": 3,
+    "value": "ProfessionalInterest3",
+    "picturePath": "picturePath3",
+    "parentCategory": {
+      "id": 1,
+      "value": "ProfessionalInterest1",
+      "picturePath": "picturePath1",
+      "parentCategory": null
+    }
+  },
+  {
+    "id": 4,
+    "value": "ProfessionalInterest4",
+    "picturePath": "picturePath4",
+    "parentCategory": {
+      "id": 1,
+      "value": "ProfessionalInterest1",
+      "picturePath": "picturePath1",
+      "parentCategory": null
+    }
+  }
+]

@@ -1,0 +1,4479 @@
+swagger: '2.0'
+info:
+  title: Living Progress - Build - Mentor Me
+  description: Living Progress - Build - Mentor Me API.
+  version: "1.0.0"
+# the sample made up domain of the service
+host: api.mentorme.com
+# array of all schemes the API supports
+schemes:
+  - http
+  - https
+# will be prefixed to all paths
+securityDefinitions:
+  basicAuth:
+    type: basic
+# HTTP Basic Authentication. Works over `HTTP` and `HTTPS`
+basePath: /v1
+produces:
+  - application/json
+paths:
+  /institutions/{id}:
+    get:
+      tags:
+        - Institution
+      summary: get institution
+      description: This endpoint is responsible for getting institution
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the Institutions
+          schema:
+            $ref: '#/definitions/Institution'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - Institution
+      summary: update institution
+      description: This endpoint is responsible for updating institution
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: body
+          in: body
+          description: The institution to update
+          schema:
+            $ref: '#/definitions/Institution'
+      responses:
+        200:
+          description: The response containing the Institution
+          schema:
+            $ref: '#/definitions/Institution'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - if token is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - Institution
+      summary: delte institution
+      description: This endpoint is responsible for deleting institution
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - if token is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutions:
+    get:
+          tags:
+            - Institution
+          summary: search for entities
+          description: This endpoint is responsible for searching by criteria. For the rest of the criteria params see TCUML.
+          security:
+          - basicAuth: []
+          parameters:
+            - name: institutionName
+              in: query
+              description: The institution Name
+              type: string
+              required: false
+            - name: parentOrganization
+              in: query
+              description: The parent organization
+              type: string
+              required: false
+            - name: location
+              in: query
+              description: The location
+              type: string
+              required: false
+            - name: email
+              in: query
+              description: The email
+              type: string
+              required: false
+            - name: description
+              in: query
+              description: The description
+              type: string
+              required: false
+            - name: status
+              in: query
+              description: The status
+              type: string
+              required: false
+            - name: pageNumber
+              in: query
+              description: The page number
+              type: number
+              format: int32
+              required: false
+            - name: pageSize
+              in: query
+              description: The page size
+              type: number
+              format: int32
+              required: false
+            - name: sortColumn
+              in: query
+              description: The sort column
+              type: string
+              required: false
+            - name: sortOrder
+              in: query
+              description: The sort order
+              type: string
+              required: false
+          responses:
+            200:
+              description: The response containing the Institutions
+              schema:
+                $ref: '#/definitions/InstitutionSearchResult'
+            400:
+              description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+              schema:
+                $ref: '#/definitions/Error'
+            401:
+              description: Authentication Error - if token is missing or invalid
+              schema:
+                $ref: '#/definitions/Error'
+            403:
+              description: Access Denied Error - if forbidden to access
+              schema:
+                $ref: '#/definitions/Error'
+            500:
+              description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+              schema:
+                $ref: '#/definitions/Error'
+            default:
+              description: Unexpected error.
+              schema:
+                $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Institution
+      summary: create institution
+      description: This endpoint is responsible for creating institution
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The institution to create
+          schema:
+            $ref: '#/definitions/InstitutionCreateBody'
+      responses:
+        200:
+          description: The response containing the Institution
+          schema:
+            $ref: '#/definitions/Institution'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+            description: Authentication Error - if token is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutions/{id}/generateAffiliationCode:
+    put:
+      tags:
+        - Institution
+      summary: get generated institution affiliation code
+      description: This endpoint is responsible for getting institution affiliation code
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the code
+          schema:
+            type: string
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - if token is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutions/affiliationCode/{affiliationCode}:
+    get:
+      tags:
+        - Institution
+      summary: get  institution for affiliation code
+      description: This endpoint is responsible for getting institution for affiliation code
+      security:
+        - basicAuth: []
+      parameters:
+        - name: affiliationCode
+          in: path
+          description: The affiliation code
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the Institution
+          schema:
+            $ref: '#/definitions/Institution'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - if token is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutions/useAffiliationCode:
+    put:
+      tags:
+        - Institution
+      summary: use affiliation code
+      description: This endpoint is responsible for setting used flag for affiliation code
+      security:
+        - basicAuth: []
+      parameters:
+        - name: affiliationCode
+          in: query
+          description: The affiliation code
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - if token is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutions/{id}/summary:
+    get:
+      tags:
+        - Institution
+      summary: get the summary
+      description: This endpoint is responsible for getting institution summary
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionSummary
+          schema:
+            $ref: '#/definitions/InstitutionSummary'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - if token is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutionalPrograms?{name}&{pageNumber}&{pageSize}&{sortColumn}&{sortOrder}:
+    get:
+      tags:
+        - InstitutionalProgram
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria. See the rest of available params in TCUML.
+      security:
+      - basicAuth: []
+      parameters:
+        - name: name
+          in: path
+          description: The attribute Name
+          type: string
+          required: true
+        - name: pageNumber
+          in: path
+          description: The page number
+          type: number
+          format: int32
+          required: true
+        - name: pageSize
+          in: path
+          description: The page size
+          type: number
+          format: int32
+          required: true
+        - name: sortColumn
+          in: path
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: path
+          description: The sort order
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionalPrograms
+          schema:
+            $ref: '#/definitions/InstitutionalProgramSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /institutionalPrograms/{id}:
+    get:
+      tags:
+        - InstitutionalProgram
+      summary: get institutionalProgram
+      description: This endpoint is responsible for getting institutionalProgram
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionalProgram
+          schema:
+            $ref: '#/definitions/InstitutionalProgram'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - InstitutionalProgram
+      summary: update institutionalProgram
+      description: This endpoint is responsible for updating institutionalProgram
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The institutionalProgram to update
+          schema:
+            $ref: '#/definitions/InstitutionalProgram'
+      responses:
+        200:
+          description: The response containing the Institution
+          schema:
+            $ref: '#/definitions/InstitutionalProgram'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - InstitutionalProgram
+      summary: delte institution
+      description: This endpoint is responsible for deleting institutionalProgram
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutionalPrograms:
+    post:
+      tags:
+        - InstitutionalProgram
+      summary: create institutionalProgram
+      description: This endpoint is responsible for creating institutionalProgram
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The institutionalProgram to update
+          schema:
+            $ref: '#/definitions/InstitutionalProgram'
+      responses:
+        200:
+          description: The response containing the Institution
+          schema:
+            $ref: '#/definitions/InstitutionalProgram'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutionalPrograms/{id}/mentees:
+    get:
+      tags:
+        - InstitutionalProgram
+      summary: get institutionalProgram mentees
+      description: This endpoint is responsible for getting institutionalProgram mentees
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the Mentees
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Mentee'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutionalPrograms/{id}/mentors:
+    get:
+      tags:
+        - InstitutionalProgram
+      summary: get institutionalProgram mentors
+      description: This endpoint is responsible for getting institutionalProgram mentors
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the Mentors
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Mentor'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /goals?{description}&{pageNumber}&{pageSize}&{sortColumn}&{sortOrder}:
+    get:
+      tags:
+        - Goal
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria
+      security:
+      - basicAuth: []
+      parameters:
+        - name: description
+          in: path
+          description: The  Name
+          type: string
+          required: true
+        - name: pageNumber
+          in: path
+          description: The page number
+          type: number
+          format: int32
+          required: true
+        - name: pageSize
+          in: path
+          description: The page size
+          type: number
+          format: int32
+          required: true
+        - name: sortColumn
+          in: path
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: path
+          description: The sort order
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionalPrograms
+          schema:
+            $ref: '#/definitions/GoalSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /goals/{id}:
+    get:
+      tags:
+        - Goal
+      summary: get goal
+      description: This endpoint is responsible for getting goal
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the Mentee
+          schema:
+            $ref: '#/definitions/Goal'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - Goal
+      summary: update Goal
+      description: This endpoint is responsible for updating Goal
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The Goal to update
+          schema:
+            $ref: '#/definitions/Goal'
+      responses:
+        200:
+          description: The response containing the Goal
+          schema:
+            $ref: '#/definitions/Goal'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - Goal
+      summary: delete Goal
+      description: This endpoint is responsible for deleting Goal
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /goals:
+    post:
+      tags:
+        - Goal
+      summary: create Goal
+      description: This endpoint is responsible for creating Goal
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The Goal to update
+          schema:
+            $ref: '#/definitions/Goal'
+      responses:
+        200:
+          description: The response containing the Goal
+          schema:
+            $ref: '#/definitions/Goal'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+  /mentees/{id}:
+    get:
+      tags:
+        - Mentee
+      summary: get Mentee
+      description: This endpoint is responsible for getting Mentee
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the Mentee
+          schema:
+            $ref: '#/definitions/Mentee'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - Mentee
+      summary: update Mentee
+      description: This endpoint is responsible for updating Mentee
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The Mentee to update
+          schema:
+            $ref: '#/definitions/Mentee'
+      responses:
+        200:
+          description: The response containing the Mentee
+          schema:
+            $ref: '#/definitions/Mentee'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - Mentee
+      summary: delte Mentee
+      description: This endpoint is responsible for deleting Mentee
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /mentees/{id}/averageScore:
+    get:
+      tags:
+        - Mentee
+      summary: get Mentee average score
+      description: This endpoint is responsible for getting Mentee
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: number
+          required: true
+      responses:
+        200:
+          description: The response containing the score
+          schema:
+            type: number
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /mentees/{id}/matchingMentors:
+      get:
+        tags:
+          - Mentee
+        summary: get Mentee match mentors
+        description: This endpoint is responsible for getting match mentors Mentee
+        security:
+          - basicAuth: []
+        parameters:
+          - name: id
+            in: path
+            description: The id
+            type: number
+            required: true
+        responses:
+          200:
+            description: The response containing the match mentors
+            schema:
+              type: array
+              items:
+                 $ref: '#/definitions/Mentor'
+          400:
+            description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+            schema:
+              $ref: '#/definitions/Error'
+          401:
+            description: Authentication Error - ien is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+          403:
+            description: Access Denied Error - if forbidden to access
+            schema:
+              $ref: '#/definitions/Error'
+          404:
+            description: Not Found - if match entity not found
+            schema:
+              $ref: '#/definitions/Error'
+          500:
+            description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            description: Unexpected error.
+            schema:
+              $ref: '#/definitions/Error'
+
+  /mentees/{id}/confirmParentConsent:
+      get:
+        tags:
+          - Mentee
+        summary: confirm parent consent
+        description: This endpoint is responsible for confirming parent consent
+        security:
+          - basicAuth: []
+        parameters:
+          - name: id
+            in: path
+            description: The id
+            type: number
+            required: true
+          - name: token
+            in: query
+            description: The token
+            type: string
+            required: true
+        responses:
+          200:
+            description: The response containing the result
+            schema:
+              type: boolean
+          400:
+            description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+            schema:
+              $ref: '#/definitions/Error'
+          401:
+            description: Authentication Error - ien is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+          403:
+            description: Access Denied Error - if forbidden to access
+            schema:
+              $ref: '#/definitions/Error'
+          404:
+            description: Not Found - if match entity not found
+            schema:
+              $ref: '#/definitions/Error'
+          500:
+            description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            description: Unexpected error.
+            schema:
+              $ref: '#/definitions/Error'
+
+  /mentees:
+    get:
+      tags:
+        - Mentee
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria
+      security:
+      - basicAuth: []
+      parameters:
+        - name: institutionId
+          in: query
+          description: The  institution id
+          type: number
+          required: false
+        - name: status
+          in: query
+          description: The  status
+          type: string
+          required: false
+        - name: minAveragePerformanceScore
+          in: query
+          description: The  min average performance scores
+          type: string
+          required: false
+        - name: maxAveragePerformanceScore
+          in: query
+          description: The  max average performance scores
+          type: string
+          required: false
+        - name: name
+          in: query
+          description: The name
+          type: string
+          required: false
+        - name: personalInterests
+          in: query
+          type: number
+          required: false
+          description: should use personalInterests[0]=id
+        - name: professionalInterests
+          in: query
+          type: number
+          required: false
+          description: should use professional[0]=id
+        - name: assignedToInstitution
+          in: query
+          description: The assigned to institution flag
+          type: boolean
+          required: false
+        - name: schoolName
+          in: query
+          description: The school name
+          type: string
+          required: false
+        - name: pageNumber
+          in: query
+          description: The page number
+          type: number
+          format: int32
+          required: false
+        - name: pageSize
+          in: query
+          description: The page size
+          type: number
+          format: int32
+          required: false
+        - name: sortColumn
+          in: query
+          description: The sort column
+          type: string
+          required: false
+        - name: sortOrder
+          in: query
+          description: The sort order
+          type: string
+          required: false
+      responses:
+        200:
+          description: The response containing the InstitutionalPrograms
+          schema:
+            $ref: '#/definitions/MenteeSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Mentee
+      summary: create Mentee
+      description: This endpoint is responsible for creating Mentee
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The Mentee to create
+          schema:
+            $ref: '#/definitions/MenteeCreateBody'
+      responses:
+        200:
+          description: The response containing the Institution
+          schema:
+            $ref: '#/definitions/Mentee'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /mentors/{id}:
+    get:
+      tags:
+        - Mentor
+      summary: get Mentor
+      description: This endpoint is responsible for getting Mentor
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: number
+          required: true
+      responses:
+        200:
+          description: The response containing the Mentor
+          schema:
+            $ref: '#/definitions/Mentor'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - Mentor
+      summary: update Mentor
+      description: This endpoint is responsible for updating Mentor
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The Mentor to update
+          schema:
+            $ref: '#/definitions/Mentor'
+      responses:
+        200:
+          description: The response containing the Mentor
+          schema:
+            $ref: '#/definitions/Mentor'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - Mentor
+      summary: delte Mentor
+      description: This endpoint is responsible for deleting Mentor
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /mentors/{id}/averageScore:
+      get:
+        tags:
+          - Mentor
+        summary: get Mentor average score
+        description: This endpoint is responsible for getting Mentor
+        security:
+          - basicAuth: []
+        parameters:
+          - name: id
+            in: path
+            description: The id
+            type: number
+            required: true
+        responses:
+          200:
+            description: The response containing the score
+            schema:
+              type: number
+          400:
+            description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+            schema:
+              $ref: '#/definitions/Error'
+          401:
+            description: Authentication Error - ien is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+          403:
+            description: Access Denied Error - if forbidden to access
+            schema:
+              $ref: '#/definitions/Error'
+          404:
+            description: Not Found - if match entity not found
+            schema:
+              $ref: '#/definitions/Error'
+          500:
+            description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            description: Unexpected error.
+            schema:
+              $ref: '#/definitions/Error'
+
+  /mentors/{id}/matchingMentees:
+      get:
+        tags:
+          - Mentor
+        summary: get Mentor match mentees
+        description: This endpoint is responsible for getting match mentees Mentees
+        security:
+          - basicAuth: []
+        parameters:
+          - name: id
+            in: path
+            description: The id
+            type: number
+            required: true
+        responses:
+          200:
+            description: The response containing the  match mentees
+            schema:
+              type: array
+              items:
+                 $ref: '#/definitions/Mentee'
+          400:
+            description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+            schema:
+              $ref: '#/definitions/Error'
+          401:
+            description: Authentication Error - ien is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+          403:
+            description: Access Denied Error - if forbidden to access
+            schema:
+              $ref: '#/definitions/Error'
+          404:
+            description: Not Found - if match entity not found
+            schema:
+              $ref: '#/definitions/Error'
+          500:
+            description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            description: Unexpected error.
+            schema:
+              $ref: '#/definitions/Error'
+
+  /mentors/linkedInExperience:
+    get:
+      tags:
+        - Mentor
+      summary: get Mentor linkedInExperience
+      description: This endpoint is responsible for getting linkedInExperience for Mentor
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the experience data
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProfessionalExperienceData'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /mentors:
+    get:
+      tags:
+        - Mentor
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria
+      security:
+      - basicAuth: []
+      parameters:
+        - name: institutionId
+          in: query
+          description: The  institution id
+          type: number
+          required: false
+        - name: status
+          in: query
+          description: The  status
+          type: string
+          required: false
+        - name: minAveragePerformanceScore
+          in: query
+          description: The  min average performance scores
+          type: string
+          required: false
+        - name: maxAveragePerformanceScore
+          in: query
+          description: The  max average performance scores
+          type: string
+          required: false
+        - name: name
+          in: query
+          description: The name
+          type: string
+          required: false
+        - name: personalInterests
+          in: query
+          type: number
+          required: false
+          description: should use personalInterests[0]=id
+        - name: professionalInterests
+          in: query
+          type: number
+          required: false
+          description: should use professional[0]=id
+        - name: assignedToInstitution
+          in: query
+          description: The assigned to institution flag
+          type: boolean
+          required: false
+        - name: mentorType
+          in: query
+          description: The  mentor type
+          type: string
+          required: false
+        - name: professionalAreas
+          in: query
+          description: use format professionalAreas[0].id=id
+          type: number
+          required: false
+        - name: companyName
+          in: query
+          description: The company name
+          type: number
+          required: false
+        - name: mentorRequestStatus
+          in: query
+          description: The mentor request status
+          type: number
+          required: false
+        - name: pageNumber
+          in: query
+          description: The page number
+          type: number
+          format: int32
+          required: false
+        - name: pageSize
+          in: query
+          description: The page size
+          type: number
+          format: int32
+          required: false
+        - name: sortColumn
+          in: query
+          description: The sort column
+          type: string
+          required: false
+        - name: sortOrder
+          in: query
+          description: The sort order
+          type: string
+          required: false
+      responses:
+        200:
+          description: The response containing the Mentor
+          schema:
+            $ref: '#/definitions/MentorSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - Mentor
+      summary: create Mentor
+      description: This endpoint is responsible for creating Mentor
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The Mentor to create
+          schema:
+            $ref: '#/definitions/MentorCreateBody'
+      responses:
+        200:
+          description: The response containing the Institution
+          schema:
+            $ref: '#/definitions/Mentor'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+          description: Authentication Error - ien is missing or invalid
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+  /menteeMentorPrograms?{program_id}&{pageNumber}&{pageSize}&{sortColumn}&{sortOrder}:
+    get:
+      tags:
+        - MenteeMentorProgram
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria
+      security:
+      - basicAuth: []
+      parameters:
+        - name: program_id
+          in: path
+          description: The pprogram_id
+          type: number
+          format: int32
+          required: true
+        - name: pageNumber
+          in: path
+          description: The page number
+          type: number
+          format: int32
+          required: true
+        - name: pageSize
+          in: path
+          description: The page size
+          type: number
+          format: int32
+          required: true
+        - name: sortColumn
+          in: path
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: path
+          description: The sort order
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the Mentor
+          schema:
+            $ref: '#/definitions/MenteeMentorProgramSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /menteeMentorPrograms/{id}:
+    get:
+      tags:
+        - MenteeMentorProgram
+      summary: get MenteeMentorProgram
+      description: This endpoint is responsible for getting MenteeMentorProgram
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the MenteeMentorProgram
+          schema:
+            $ref: '#/definitions/MenteeMentorProgram'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - MenteeMentorProgram
+      summary: update MenteeMentorProgram
+      description: This endpoint is responsible for updating MenteeMentorProgram
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The MenteeMentorProgram to update
+          schema:
+            $ref: '#/definitions/MenteeMentorProgram'
+      responses:
+        200:
+          description: The response containing the MenteeMentorProgram
+          schema:
+            $ref: '#/definitions/MenteeMentorProgram'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - MenteeMentorProgram
+      summary: delte MenteeMentorProgram
+      description: This endpoint is responsible for deleting MenteeMentorProgram
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /menteeMentorPrograms:
+    post:
+      tags:
+        - MenteeMentorProgram
+      summary: create MenteeMentorProgram
+      description: This endpoint is responsible for creating MenteeMentorProgram
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The MenteeMentorProgram to update
+          schema:
+            $ref: '#/definitions/MenteeMentorProgram'
+      responses:
+        200:
+          description: The response containing the MenteeMentorProgram
+          schema:
+            $ref: '#/definitions/MenteeMentorProgram'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /menteeMentorPrograms/{id}/menteeFeedback:
+    put:
+      tags:
+        - MenteeMentorProgram
+      summary: update MenteeMentorProgram feedback
+      description: This endpoint is responsible for updating MenteeMentorProgram feedback
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: menteeFeedback
+          in: body
+          description: The MenteeFeedback
+          schema:
+            $ref: '#/definitions/MenteeFeedback'
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /menteeMentorPrograms/{id}/mentorFeedback:
+    put:
+      tags:
+        - MenteeMentorProgram
+      summary: update MenteeMentorProgram feedback
+      description: This endpoint is responsible for updating MenteeMentorProgram feedback
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: menteeFeedback
+          in: body
+          description: The MentorFeedback
+          schema:
+            $ref: '#/definitions/MentorFeedback'
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /menteeMentorGoals?{mentee_mentor_program_id}&{pageNumber}&{pageSize}&{sortColumn}&{sortOrder}:
+    get:
+      tags:
+        - MenteeMentorGoal
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria
+      security:
+      - basicAuth: []
+      parameters:
+        - name: mentee_mentor_program_id
+          in: path
+          description: The program id
+          type: number
+          format: int32
+          required: true
+        - name: pageNumber
+          in: path
+          description: The page number
+          type: number
+          format: int32
+          required: true
+        - name: pageSize
+          in: path
+          description: The page size
+          type: number
+          format: int32
+          required: true
+        - name: sortColumn
+          in: path
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: path
+          description: The sort order
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the Mentor
+          schema:
+            $ref: '#/definitions/MenteeMentorGoalSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /menteeMentorGoals/{id}:
+    get:
+      tags:
+        - MenteeMentorGoal
+      summary: get MenteeMentorGoal
+      description: This endpoint is responsible for getting MenteeMentorGoal
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the MenteeMentorGoal
+          schema:
+            $ref: '#/definitions/MenteeMentorGoal'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - MenteeMentorGoal
+      summary: update MenteeMentorGoal
+      description: This endpoint is responsible for updating MenteeMentorGoal
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The MenteeMentorGoal to update
+          schema:
+            $ref: '#/definitions/MenteeMentorGoal'
+      responses:
+        200:
+          description: The response containing the MenteeMentorGoal
+          schema:
+            $ref: '#/definitions/MenteeMentorGoal'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - MenteeMentorGoal
+      summary: delte MenteeMentorGoal
+      description: This endpoint is responsible for deleting MenteeMentorGoal
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /menteeMentorGoals:
+    post:
+      tags:
+        - MenteeMentorGoal
+      summary: create MenteeMentorGoal
+      description: This endpoint is responsible for creating MenteeMentorGoal
+      security:
+        - basicAuth: []
+      parameters:
+        - name: menteeMentorGoal
+          in: body
+          description: The MenteeMentorGoal to update
+          schema:
+            $ref: '#/definitions/MenteeMentorGoal'
+      responses:
+        200:
+          description: The response containing the MenteeMentorGoal
+          schema:
+            $ref: '#/definitions/MenteeMentorGoal'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /menteeMentorTasks?{mentee_mentor_program_id}&{pageNumber}&{pageSize}&{sortColumn}&{sortOrder}:
+    get:
+      tags:
+        - MenteeMentorTask
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria
+      security:
+      - basicAuth: []
+      parameters:
+        - name: mentee_mentor_program_id
+          in: path
+          description: The program id
+          type: number
+          format: int32
+          required: true
+        - name: pageNumber
+          in: path
+          description: The page number
+          type: number
+          format: int32
+          required: true
+        - name: pageSize
+          in: path
+          description: The page size
+          type: number
+          format: int32
+          required: true
+        - name: sortColumn
+          in: path
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: path
+          description: The sort order
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the MenteeMentorTasks
+          schema:
+            $ref: '#/definitions/MenteeMentorTaskSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /menteeMentorTasks/{id}:
+    get:
+      tags:
+        - MenteeMentorTask
+      summary: get MenteeMentorTask
+      description: This endpoint is responsible for getting MenteeMentorTask
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the MenteeMentorTask
+          schema:
+            $ref: '#/definitions/MenteeMentorTask'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - MenteeMentorTask
+      summary: update MenteeMentorTask
+      description: This endpoint is responsible for updating MenteeMentorTask
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The MenteeMentorTask to update
+          schema:
+            $ref: '#/definitions/MenteeMentorTask'
+      responses:
+        200:
+          description: The response containing the MenteeMentorTask
+          schema:
+            $ref: '#/definitions/MenteeMentorTask'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - MenteeMentorTask
+      summary: delte MenteeMentorTask
+      description: This endpoint is responsible for deleting MenteeMentorTask
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /menteeMentorTasks:
+    post:
+      tags:
+        - MenteeMentorTask
+      summary: create MenteeMentorTask
+      description: This endpoint is responsible for creating MenteeMentorTask
+      security:
+        - basicAuth: []
+      parameters:
+        - name: menteeMentorGoal
+          in: body
+          description: The MenteeMentorGoal to update
+          schema:
+            $ref: '#/definitions/MenteeMentorTask'
+      responses:
+        200:
+          description: The response containing the MenteeMentorGoal
+          schema:
+            $ref: '#/definitions/MenteeMentorTask'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+  /institutionAdmins?{institution_id}&{pageNumber}&{pageSize}&{sortColumn}&{sortOrder}:
+    get:
+      tags:
+        - InstitutionAdmin
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria. See the rest of available params in TCUML.
+      security:
+      - basicAuth: []
+      parameters:
+        - name: institution_id
+          in: path
+          description: The attribute Name
+          type: string
+          required: true
+        - name: pageNumber
+          in: path
+          description: The page number
+          type: number
+          format: int32
+          required: true
+        - name: pageSize
+          in: path
+          description: The page size
+          type: number
+          format: int32
+          required: true
+        - name: sortColumn
+          in: path
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: path
+          description: The sort order
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionAdmins
+          schema:
+            $ref: '#/definitions/InstitutionAdminSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /institutionAdmins/{id}:
+    get:
+      tags:
+        - InstitutionAdmin
+      summary: get institutionAdmin
+      description: This endpoint is responsible for getting institutionAdmin
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionAdmin
+          schema:
+            $ref: '#/definitions/InstitutionAdmin'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - InstitutionAdmin
+      summary: update institutionAdmin
+      description: This endpoint is responsible for updating institutionAdmin
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The institutionAdmin to update
+          schema:
+            $ref: '#/definitions/InstitutionAdmin'
+      responses:
+        200:
+          description: The response containing the Institution
+          schema:
+            $ref: '#/definitions/InstitutionAdmin'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - InstitutionAdmin
+      summary: delete institutionAdmin
+      description: This endpoint is responsible for deleting institutionAdmin
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutionAdmins:
+    post:
+      tags:
+        - InstitutionAdmin
+      summary: create institutionAdmin
+      description: This endpoint is responsible for creating institutionAdmin
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The institutionAdmin to update
+          schema:
+            $ref: '#/definitions/InstitutionAdmin'
+      responses:
+        200:
+          description: The response containing the InstitutionAdmin
+          schema:
+            $ref: '#/definitions/InstitutionAdmin'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /institutionAgreements?{institution_id}&{pageNumber}&{pageSize}&{sortColumn}&{sortOrder}:
+    get:
+      tags:
+        - InstitutionAgreement
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria. See the rest of available params in TCUML.
+      security:
+      - basicAuth: []
+      parameters:
+        - name: institution_id
+          in: path
+          description: The attribute Name
+          type: string
+          required: true
+        - name: pageNumber
+          in: path
+          description: The page number
+          type: number
+          format: int32
+          required: true
+        - name: pageSize
+          in: path
+          description: The page size
+          type: number
+          format: int32
+          required: true
+        - name: sortColumn
+          in: path
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: path
+          description: The sort order
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionAdmins
+          schema:
+            $ref: '#/definitions/InstitutionAgreementSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /institutionAgreements/{id}:
+    get:
+      tags:
+        - InstitutionAgreement
+      summary: get institutionAgreement
+      description: This endpoint is responsible for getting institutionAgreement
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionAgreement
+          schema:
+            $ref: '#/definitions/InstitutionAgreement'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - InstitutionAgreement
+      summary: update institutionAgreement
+      description: This endpoint is responsible for updating institutionAgreement
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The institutionAgreement to update
+          schema:
+            $ref: '#/definitions/InstitutionAgreement'
+      responses:
+        200:
+          description: The response containing the InstitutionAgreement
+          schema:
+            $ref: '#/definitions/InstitutionAgreement'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - InstitutionAgreement
+      summary: delete institutionAgreement
+      description: This endpoint is responsible for deleting institutionAgreement
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutionAgreements:
+    post:
+      tags:
+        - InstitutionAgreement
+      summary: create institutionAgreement
+      description: This endpoint is responsible for creating institutionAgreement
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The institutionAdmin to update
+          schema:
+            $ref: '#/definitions/InstitutionAgreement'
+      responses:
+        200:
+          description: The response containing the InstitutionAdmin
+          schema:
+            $ref: '#/definitions/InstitutionAgreement'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /institutionAdminAccessRequests?{institution_id}&{pageNumber}&{pageSize}&{sortColumn}&{sortOrder}:
+    get:
+      tags:
+        - InstitutionAdminAccessRequest
+      summary: search for entities
+      description: This endpoint is responsible for searching by criteria. See the rest of available params in TCUML.
+      security:
+      - basicAuth: []
+      parameters:
+        - name: institution_id
+          in: path
+          description: The attribute Name
+          type: string
+          required: true
+        - name: pageNumber
+          in: path
+          description: The page number
+          type: number
+          format: int32
+          required: true
+        - name: pageSize
+          in: path
+          description: The page size
+          type: number
+          format: int32
+          required: true
+        - name: sortColumn
+          in: path
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: path
+          description: The sort order
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionAdminAccessRequests
+          schema:
+            $ref: '#/definitions/InstitutionAdminAccessRequestSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /institutionAdminAccessRequests/{id}:
+    get:
+      tags:
+        - InstitutionAdminAccessRequest
+      summary: get institutionAdminAccessRequest
+      description: This endpoint is responsible for getting institutionAdminAccessRequest
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the InstitutionAdminAccessRequest
+          schema:
+            $ref: '#/definitions/InstitutionAdminAccessRequest'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    put:
+      tags:
+        - InstitutionAdminAccessRequest
+      summary: update institutionAdminAccessRequest
+      description: This endpoint is responsible for updating institutionAdminAccessRequest
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: asset
+          in: body
+          description: The institutionAgreement to update
+          schema:
+            $ref: '#/definitions/InstitutionAdminAccessRequest'
+      responses:
+        200:
+          description: The response containing the InstitutionAdminAccessRequest
+          schema:
+            $ref: '#/definitions/InstitutionAdminAccessRequest'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - InstitutionAdminAccessRequest
+      summary: delete institutionAdminAccessRequest
+      description: This endpoint is responsible for deleting institutionAdminAccessRequest
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /institutionAdminAccessRequests:
+    post:
+      tags:
+        - InstitutionAdminAccessRequest
+      summary: create institutionAdminAccessRequest
+      description: This endpoint is responsible for creating institutionAdminAccessRequest
+      security:
+        - basicAuth: []
+      parameters:
+        - name: institution
+          in: body
+          description: The institutionAdmin to update
+          schema:
+            $ref: '#/definitions/InstitutionAdminAccessRequest'
+      responses:
+        200:
+          description: The response containing the InstitutionAdminAccessRequest
+          schema:
+            $ref: '#/definitions/InstitutionAdminAccessRequest'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /users/{id}:
+    get:
+      tags:
+        - User
+      summary: get User
+      description: This endpoint is responsible for getting User
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        200:
+          description: The response containing the User
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+            description: Authentication Error - if token is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    put:
+      tags:
+        - User
+      summary: update User
+      description: This endpoint is responsible for updating User
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+        - name: user
+          in: body
+          description: The User to update
+          schema:
+            $ref: '#/definitions/User'
+      responses:
+        200:
+          description: The response containing the User
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+            description: Authentication Error - if token is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+    delete:
+      tags:
+        - User
+      summary: delete User
+      description: This endpoint is responsible for deleting User
+      security:
+        - basicAuth: []
+      parameters:
+        - name: id
+          in: path
+          description: The id
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+            description: Authentication Error - if token is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /users:
+    get:
+      tags:
+        - User
+      summary: search for entities
+      description: This endpoint is responsible for searching by attribute
+      security:
+        - basicAuth: []
+      parameters:
+        - name: name
+          in: query
+          description: The attribute Name
+          type: string
+          required: false
+        - name: pageNumber
+          in: query
+          description: The page number
+          type: number
+          format: int32
+          required: false
+        - name: pageSize
+          in: query
+          description: The page size
+          type: number
+          format: int32
+          required: false
+        - name: sortColumn
+          in: query
+          description: The sort column
+          type: string
+          required: true
+        - name: sortOrder
+          in: query
+          description: The sort order
+          type: string
+          required: false
+      responses:
+        200:
+          description: The response containing the Users
+          schema:
+            $ref: '#/definitions/UserSearchResult'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+            description: Authentication Error - if token is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+    post:
+      tags:
+        - User
+      summary: create User
+      description: This endpoint is responsible for creating User
+      security:
+        - basicAuth: []
+      parameters:
+        - name: user
+          in: body
+          description: The User to create
+          schema:
+            $ref: '#/definitions/UserCreateBody'
+      responses:
+        200:
+          description: The response containing the User
+          schema:
+            $ref: '#/definitions/User'
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        401:
+            description: Authentication Error - if token is missing or invalid
+            schema:
+              $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /users/forgotPassword:
+    put:
+      tags:
+        - User
+      summary: initiate forgot password
+      description: This endpoint is responsible for forgot password functionality
+      security:
+        - basicAuth: []
+      parameters:
+        - name: email
+          in: query
+          description: The email
+          type: string
+          required: true
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        403:
+          description: Access Denied Error - if forbidden to access
+          schema:
+            $ref: '#/definitions/Error'
+        404:
+          description: Not Found - if match entity not found
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /users/updatePassword:
+    put:
+      tags:
+        - User
+      summary: initiate forgot password
+      description: This endpoint is responsible for forgot password functionality
+      security:
+        - basicAuth: []
+      parameters:
+        - name: newPassword
+          in: body
+          description: The new password.
+          schema:
+             $ref: '#/definitions/NewPassword'
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /login:
+    post:
+      tags:
+        - Security
+      summary: Sends login and password in header
+      description: This endpoint is responsible for login
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the security token
+          schema:
+            type: string
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /logout:
+    post:
+      tags:
+        - Security
+      summary: Logs out
+      description: This endpoint is responsible for log out.
+      security:
+        - basicAuth: []
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /auth:
+    post:
+      tags:
+        - Security
+      summary: The social login endpoint
+      description: This endpoint is responsible for social login.
+      security:
+        - basicAuth: []
+      responses:
+        400:
+          description: Bad Request - if there was problem with the request (e.g. malformed or some parameters are missing)
+          schema:
+            $ref: '#/definitions/Error'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+  /lookups/coutries:
+    get:
+      tags:
+        - Lookups
+      summary: get Countriess
+      description: This endpoint is responsible for getting lookups
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the lookups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Country'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+
+  /lookups/userRoles:
+    get:
+      tags:
+        - Lookups
+      summary: get UserRoles
+      description: This endpoint is responsible for getting lookups
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the lookups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/UserRole'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /lookups/states:
+    get:
+      tags:
+        - Lookups
+      summary: get states
+      description: This endpoint is responsible for getting lookups
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the lookups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/State'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /lookups/professionalConsultantAreas:
+      get:
+        tags:
+          - Lookups
+        summary: get professionalConsultantAreas
+        description: This endpoint is responsible for getting lookups
+        security:
+          - basicAuth: []
+        responses:
+          200:
+            description: The response containing the lookups
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/ProfessionalConsultantArea'
+          500:
+            description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            description: Unexpected error.
+            schema:
+              $ref: '#/definitions/Error'
+
+  /lookups/goalCategories:
+    get:
+      tags:
+        - Lookups
+      summary: get goalCategories
+      description: This endpoint is responsible for getting lookups
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the lookups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/GoalCategory'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /lookups/programCategories:
+      get:
+        tags:
+          - Lookups
+        summary: get programCategories
+        description: This endpoint is responsible for getting lookups
+        security:
+          - basicAuth: []
+        responses:
+          200:
+            description: The response containing the lookups
+            schema:
+              type: array
+              items:
+                $ref: '#/definitions/ProgramCategory'
+          500:
+            description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+            schema:
+              $ref: '#/definitions/Error'
+          default:
+            description: Unexpected error.
+            schema:
+              $ref: '#/definitions/Error'
+
+  /lookups/personalInterests:
+    get:
+      tags:
+        - Lookups
+      summary: get personalInterests
+      description: This endpoint is responsible for getting lookups
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the lookups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/PersonalInterest'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /lookups/professionalInterests:
+    get:
+      tags:
+        - Lookups
+      summary: get professionalInterests
+      description: This endpoint is responsible for getting lookups
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the lookups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProfessionalInterest'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+  /lookups/documentCategories:
+    get:
+      tags:
+        - Lookups
+      summary: get DocumentCategories
+      description: This endpoint is responsible for getting lookups
+      security:
+        - basicAuth: []
+      responses:
+        200:
+          description: The response containing the lookups
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/DocumentCategory'
+        500:
+          description: Internal server error - if the request was properly formatted, but the operation failed on the server side
+          schema:
+            $ref: '#/definitions/Error'
+        default:
+          description: Unexpected error.
+          schema:
+            $ref: '#/definitions/Error'
+
+
+
+definitions:
+  UserCreateBody:
+    type: object
+    properties:
+      username:
+        type: string
+        description: The username.
+      email:
+        type: string
+        description: The email.
+      profilePicturePath:
+        type: string
+        description: The profile picture path.
+      status:
+        type: string
+        description: The status.
+      password:
+        type: string
+        description: The password.
+      firstName:
+        type: string
+        description: The first name.
+      lastName:
+        type: string
+        description: The last name.
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/UserRole'
+
+  User:
+    type: object
+    properties:
+      id:
+        type: number
+        format: integer
+        description: The id.
+      username:
+        type: string
+        description: The username.
+      email:
+        type: string
+        description: The email.
+      profilePicturePath:
+        type: string
+        description: The profile picture path.
+      status:
+        type: string
+        description: The status.
+      password:
+        type: string
+        description: The password (present only in PUT and POST requests, not in GET).
+      firstName:
+        type: string
+        description: The first name.
+      lastName:
+        type: string
+        description: The last name.
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/UserRole'
+
+  UserSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/User'
+
+
+  UserRole:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      value:
+        type: string
+        description: The value.
+
+  NewPassword:
+      type: object
+      properties:
+        token:
+          type: string
+          format: int32
+          description: The token.
+        newPassword:
+          type: string
+          description: The new password.
+
+  Country:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      value:
+        type: string
+        description: The value.
+
+  State:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      value:
+        type: string
+        description: The value.
+
+  DocumentCategory:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      value:
+        type: string
+        description: The value.
+
+  ProgramCategory:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      value:
+        type: string
+        description: The value.
+
+  GoalCategory:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The id.
+        value:
+          type: string
+          description: The value.
+
+  ProfessionalConsultantArea:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The id.
+        value:
+          type: string
+          description: The value.
+
+  InstitutionContact:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The id.
+        title:
+          type: string
+          description: The title.
+        firstName:
+          type: string
+          description: The first name.
+        lastName:
+          type: string
+          description: The last name.
+        email:
+          type: string
+          description: The email.
+        phoneNumber:
+          type: string
+          description: The phone number.
+        primaryContact:
+          type: boolean
+          description: The primary contact flag.
+
+  ParentConsent:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The id.
+        parentName:
+          type: integer
+          format: int32
+          description: The parent name.
+        signatureFilePath:
+          type: string
+          description: The signature file path.
+        parentEmail:
+          type: string
+          description: The parent email.
+        token:
+          type: string
+          description: The token.
+
+  InstitutionAffiliationCode:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int32
+            description: The id.
+          code:
+            type: string
+            description: The code.
+          institutionId:
+            type: number
+            description: The institution id.
+          used:
+            type: boolean
+            description: The used flag.
+
+  PersonalInterest:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int32
+          description: The id.
+        value:
+          type: string
+          description: The value.
+        picturePath:
+          type: string
+          description: The picture path.
+        parentCategory:
+          $ref: '#/definitions/PersonalInterest'
+
+  WeightedPersonalInterest:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int32
+            description: The id.
+          weight:
+            type: number
+            description: The weight.
+          userId:
+            type: number
+            description: The user id.
+          personalInterest:
+            $ref: '#/definitions/PersonalInterest'
+
+  ProfessionalInterest:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int32
+            description: The id.
+          value:
+            type: string
+            description: The value.
+          picturePath:
+            type: string
+            description: The picture path.
+          parentCategory:
+            $ref: '#/definitions/ProfessionalInterest'
+
+  WeightedProfessionalInterest:
+        type: object
+        properties:
+          id:
+            type: integer
+            format: int32
+            description: The id.
+          weight:
+            type: number
+            description: The weight.
+          userId:
+            type: number
+            description: The user id.
+          professionalInterest:
+            $ref: '#/definitions/ProfessionalInterest'
+
+  InstitutionCreateBody:
+    type: object
+    properties:
+      institutionName:
+        type: string
+        description: The name.
+      parentOrganization:
+        type: string
+        description: The parent organization.
+      streetAddress:
+        type: string
+        description: The street address.
+      city:
+        type: string
+        description: The city.
+      zip:
+        type: string
+        description: The zip.
+      phone:
+         type: string
+         description: The phone.
+      email:
+        type: string
+        description: The email.
+      description:
+        type: string
+        description: The description.
+      status:
+        type: string
+        description: The status.
+      logoPath:
+        type: string
+        description: The logo path.
+      contacts:
+        type: array
+        items:
+          $ref: '#/definitions/InstitutionContact'
+      state:
+        $ref: '#/definitions/State'
+      country:
+        $ref: '#/definitions/Country'
+
+  Institution:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      createdOn:
+        type: integer
+        format: int32
+        description: The created on datetime with unix epoch format.
+      institutionName:
+        type: string
+        description: The name.
+      parentOrganization:
+        type: string
+        description: The parent organization.
+      streetAddress:
+        type: string
+        description: The street address.
+      city:
+        type: string
+        description: The city.
+      zip:
+        type: string
+        description: The zip.
+      phone:
+         type: string
+         description: The phone.
+      email:
+        type: string
+        description: The email.
+      description:
+        type: string
+        description: The description.
+      status:
+        type: string
+        description: The status.
+      logoPath:
+        type: string
+        description: The logo path.
+      contacts:
+        type: array
+        items:
+          $ref: '#/definitions/InstitutionContact'
+      state:
+        $ref: '#/definitions/State'
+      country:
+        $ref: '#/definitions/Country'
+
+
+  InstitutionSummary:
+    type: object
+    properties:
+      institutionalProgramsCount:
+        type: number
+        format: integer
+        description: The institutional programs count.
+      upcomingEventsCount:
+        type: number
+        format: integer
+        description: The events count.
+      associatedMenteesCount:
+        type: number
+        format: integer
+        description: The mentees count.
+      associatedMentorsCount:
+        type: number
+        format: integer
+        description: The mentors count.
+
+  InstitutionalProgram:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      program_name:
+        type: string
+        description: The name.
+
+  InstitutionSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/Institution'
+
+  InstitutionalProgramSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/InstitutionalProgram'
+
+  InstitutionAdmin:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      username:
+        type: string
+        description: The username.
+      institution_id:
+        type: integer
+        format: int32
+        description: The institution id.
+
+  InstitutionAdminSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/InstitutionAdmin'
+
+  InstitutionAgreement:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      agreement_name:
+        type: string
+        description: The name.
+      agreement_file_path:
+        type: string
+        description: The file path.
+      institution_id:
+        type: integer
+        format: int32
+        description: The institution id.
+
+  InstitutionAgreementSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/InstitutionAgreement'
+
+
+  InstitutionAdminAccessRequest:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      status:
+        type: string
+        description: The status.
+      institution:
+        $ref: '#/definitions/Institution'
+      institution_admin:
+        $ref: '#/definitions/InstitutionAdmin'
+
+  InstitutionAdminAccessRequestSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/InstitutionAdminAccessRequest'
+
+  MentorCreateBody:
+    type: object
+    properties:
+      username:
+        type: string
+        description: The username.
+      firstName:
+        type: string
+        description: The first name.
+      lastName:
+        type: string
+        description: The last name.
+      email:
+        type: string
+        description: The email.
+      profilePicturePath:
+        type: string
+        description: The profile picture path.
+      status:
+        type: string
+        description: The status.
+      assignedToInstitution:
+        type: boolean
+        description: The assigned to institution flag.
+      birthDate:
+        type: string
+        description: The birth date.
+      phone:
+         type: string
+         description: The phone.
+      skypeUsername:
+        type: string
+        description: The skype username.
+      introVideoLink:
+        type: string
+        description: The intro video link.
+      description:
+        type: string
+        description: The description.
+      averagePerformanceScore:
+        type: number
+        description: The average performance score.
+      mentorType:
+        type: string
+        description: The mentor type.
+      companyName:
+        type: string
+        description: The company name.
+      linkedInUrl:
+        type: string
+        description: The linkedIn url.
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/UserRole'
+      personalInterests:
+        type: array
+        items:
+          $ref: '#/definitions/WeightedPersonalInterest'
+      professionalInterests:
+        type: array
+        items:
+          $ref: '#/definitions/WeightedProfessionalInterest'
+      institution:
+        $ref: '#/definitions/Institution'
+      institutionAffiliationCode:
+        $ref: '#/definitions/InstitutionAffiliationCode'
+      parentConsent:
+        $ref: '#/definitions/ParentConsent'
+
+  Mentor:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      createdOn:
+        type: integer
+        format: int32
+        description: The created on datetime with unix epoch format.
+      username:
+        type: string
+        description: The username.
+      firstName:
+        type: string
+        description: The first name.
+      lastName:
+        type: string
+        description: The last name.
+      email:
+        type: string
+        description: The email.
+      profilePicturePath:
+        type: string
+        description: The profile picture path.
+      status:
+        type: string
+        description: The status.
+      assignedToInstitution:
+        type: boolean
+        description: The assigned to institution flag.
+      birthDate:
+        type: string
+        description: The birth date.
+      phone:
+         type: string
+         description: The phone.
+      skypeUsername:
+        type: string
+        description: The skype username.
+      introVideoLink:
+        type: string
+        description: The intro video link.
+      description:
+        type: string
+        description: The description.
+      averagePerformanceScore:
+        type: number
+        description: The average performance score.
+      mentorType:
+        type: string
+        description: The mentor type.
+      companyName:
+        type: string
+        description: The company name.
+      linkedInUrl:
+        type: string
+        description: The linkedIn url.
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/UserRole'
+      personalInterests:
+        type: array
+        items:
+          $ref: '#/definitions/WeightedPersonalInterest'
+      professionalInterests:
+        type: array
+        items:
+          $ref: '#/definitions/WeightedProfessionalInterest'
+      institution:
+        $ref: '#/definitions/Institution'
+      institutionAffiliationCode:
+        $ref: '#/definitions/InstitutionAffiliationCode'
+      parentConsent:
+        $ref: '#/definitions/ParentConsent'
+
+  MentorSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/Mentor'
+
+  MenteeCreateBody:
+    type: object
+    properties:
+      username:
+        type: string
+        description: The username.
+      firstName:
+        type: string
+        description: The first name.
+      lastName:
+        type: string
+        description: The last name.
+      email:
+        type: string
+        description: The email.
+      profilePicturePath:
+        type: string
+        description: The profile picture path.
+      status:
+        type: string
+        description: The status.
+      assignedToInstitution:
+        type: boolean
+        description: The assigned to institution flag.
+      birthDate:
+        type: string
+        description: The birth date.
+      phone:
+         type: string
+         description: The phone.
+      skypeUsername:
+        type: string
+        description: The skype username.
+      introVideoLink:
+        type: string
+        description: The intro video link.
+      description:
+        type: string
+        description: The description.
+      averagePerformanceScore:
+        type: number
+        description: The average performance score.
+      familyIncome:
+        type: number
+        description: The family income.
+      school:
+        type: string
+        description: The school.
+      facebookUrl:
+        type: string
+        description: The facebook url.
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/UserRole'
+      personalInterests:
+        type: array
+        items:
+          $ref: '#/definitions/WeightedPersonalInterest'
+      professionalInterests:
+        type: array
+        items:
+          $ref: '#/definitions/WeightedProfessionalInterest'
+      institution:
+        $ref: '#/definitions/Institution'
+      institutionAffiliationCode:
+        $ref: '#/definitions/InstitutionAffiliationCode'
+      parentConsent:
+        $ref: '#/definitions/ParentConsent'
+
+  Mentee:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      createdOn:
+        type: integer
+        format: int32
+        description: The created on datetime with unix epoch format.
+      username:
+        type: string
+        description: The username.
+      firstName:
+        type: string
+        description: The first name.
+      lastName:
+        type: string
+        description: The last name.
+      email:
+        type: string
+        description: The email.
+      profilePicturePath:
+        type: string
+        description: The profile picture path.
+      status:
+        type: string
+        description: The status.
+      assignedToInstitution:
+        type: boolean
+        description: The assigned to institution flag.
+      birthDate:
+        type: string
+        description: The birth date.
+      phone:
+         type: string
+         description: The phone.
+      skypeUsername:
+        type: string
+        description: The skype username.
+      introVideoLink:
+        type: string
+        description: The intro video link.
+      description:
+        type: string
+        description: The description.
+      averagePerformanceScore:
+        type: number
+        description: The average performance score.
+      familyIncome:
+        type: number
+        description: The family income.
+      school:
+        type: string
+        description: The school.
+      facebookUrl:
+        type: string
+        description: The facebook url.
+      roles:
+        type: array
+        items:
+          $ref: '#/definitions/UserRole'
+      personalInterests:
+        type: array
+        items:
+          $ref: '#/definitions/WeightedPersonalInterest'
+      professionalInterests:
+        type: array
+        items:
+          $ref: '#/definitions/WeightedProfessionalInterest'
+      institution:
+        $ref: '#/definitions/Institution'
+      institutionAffiliationCode:
+        $ref: '#/definitions/InstitutionAffiliationCode'
+      parentConsent:
+        $ref: '#/definitions/ParentConsent'
+
+
+  MenteeSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/Mentee'
+
+  MenteeMentorProgram:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      mentor:
+        $ref: '#/definitions/Mentor'
+      mentee:
+        $ref: '#/definitions/Mentee'
+      institutional_program:
+        $ref: '#/definitions/InstitutionalProgram'
+
+  MenteeFeedback:
+    type: object
+    properties:
+      mentor_score:
+        type: number
+        format: integer
+        description: The score.
+      comment:
+        type: string
+        description: The comment.
+
+  MentorFeedback:
+    type: object
+    properties:
+      mentee_score:
+        type: number
+        format: integer
+        description: The score.
+      comment:
+        type: string
+        description: The comment.
+
+  MenteeMentorProgramSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/MenteeMentorProgram'
+
+  ProfessionalExperienceData:
+    type: object
+
+  MenteeMentorGoalSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/MenteeMentorGoal'
+
+  MenteeMentorTaskSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/MenteeMentorTask'
+
+  Goal:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      number:
+        type: integer
+        description: The number.
+
+  MenteeMentorGoal:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      goal:
+        $ref: '#/definitions/Goal'
+
+  GoalSearchResult:
+    type: object
+    properties:
+      total:
+        type: number
+        format: integer
+        description: The total.
+      totalPages:
+        type: number
+        format: integer
+        description: The total pages.
+      entities:
+        type: array
+        items:
+          $ref: '#/definitions/Goal'
+
+  Task:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      description:
+        type: string
+        description: The description.
+
+  MenteeMentorTask:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int32
+        description: The id.
+      task:
+        $ref: '#/definitions/Task'
+
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
