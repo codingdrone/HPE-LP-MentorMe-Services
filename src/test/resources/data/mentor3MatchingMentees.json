@@ -1,7 +1,7 @@
 [
   {
     "id": 4,
-    "createdOn": 1475510400000,
+    "createdOn": "2016-10-04T00:00:00",
     "username": "test4",
     "firstName": "firstname4",
     "lastName": "lastname4",
@@ -16,7 +16,7 @@
     "status": "ACTIVE",
     "institution": {
       "id": 1,
-      "createdOn": 1475251200000,
+      "createdOn": "2016-10-01T00:00:00",
       "institutionName": "institutionName1",
       "parentOrganization": "parentOrganization1",
       "streetAddress": "streetAddress1",
@@ -146,7 +146,7 @@
   },
   {
     "id": 13,
-    "createdOn": 1476288000000,
+    "createdOn": "2016-10-13T00:00:00",
     "username": "test13",
     "firstName": "firstname13",
     "lastName": "lastname13",
@@ -161,7 +161,7 @@
     "status": "ACTIVE",
     "institution": {
       "id": 1,
-      "createdOn": 1475251200000,
+      "createdOn": "2016-10-01T00:00:00",
       "institutionName": "institutionName1",
       "parentOrganization": "parentOrganization1",
       "streetAddress": "streetAddress1",
@@ -240,7 +240,7 @@
   },
   {
     "id": 11,
-    "createdOn": 1476115200000,
+    "createdOn": "2016-10-11T00:00:00",
     "username": "test11",
     "firstName": "firstname11",
     "lastName": "lastname11",
@@ -255,7 +255,7 @@
     "status": "INACTIVE",
     "institution": {
       "id": 1,
-      "createdOn": 1475251200000,
+      "createdOn": "2016-10-01T00:00:00",
       "institutionName": "institutionName1",
       "parentOrganization": "parentOrganization1",
       "streetAddress": "streetAddress1",

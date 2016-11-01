@@ -9,17 +9,23 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ForgotPasswordRepository extends JpaRepository<ForgotPassword,Long> {
     /**
      * This method is used to get the ForgotPassword by token.
-     * 
-     * Parameters:
-     * - token: String
-     * 
-     * Returns:
-     * the ForgotPassword
-     * @param token 
-     * @return 
+     * @param token the reset password token
+     * @return the forgot password
      */
     ForgotPassword findByToken(String token);
 
+    /**
+     * Get count by user id.
+     * @param userId the user id.
+     * @return the count of forgot password entities by user id.
+     */
     long countByUserId(long userId);
+
+
+    /**
+     * Delete all forgot passwords by user id.
+     * @param userId the user id.
+     */
+    void deleteByUserId(long userId);
 }
 

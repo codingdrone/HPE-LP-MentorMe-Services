@@ -4,6 +4,7 @@ import com.livingprogress.mentorme.entities.ForgotPassword;
 import com.livingprogress.mentorme.entities.NewPassword;
 import com.livingprogress.mentorme.entities.User;
 import com.livingprogress.mentorme.entities.UserSearchCriteria;
+import com.livingprogress.mentorme.exceptions.AccessDeniedException;
 import com.livingprogress.mentorme.exceptions.EntityNotFoundException;
 import com.livingprogress.mentorme.exceptions.MentorMeException;
 
@@ -29,6 +30,7 @@ public interface UserService extends GenericService<User, UserSearchCriteria> {
      * @return the created forgot password entity
      * @throws IllegalArgumentException if id is not positive
      * @throws EntityNotFoundException if the entity does not exist
+     * @throws AccessDeniedException if does not allow to perform action
      * @throws MentorMeException if any other error occurred during operation
      */
     ForgotPassword forgotPassword(long userId) throws MentorMeException;

@@ -20,7 +20,6 @@ import java.util.UUID;
  */
 @SpringBootApplication
 public class Application {
-
     /**
      * The request id listener
      */

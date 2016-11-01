@@ -1058,7 +1058,7 @@ CREATE TABLE IF NOT EXISTS `institutional_program_link` (
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
--- Table `institutional_program_link`
+-- Table `institutional_program_area`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `mentor_professional_area` (
   `mentor_id` BIGINT NOT NULL,

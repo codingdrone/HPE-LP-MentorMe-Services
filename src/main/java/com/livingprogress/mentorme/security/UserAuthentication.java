@@ -22,12 +22,12 @@ public class UserAuthentication implements Authentication {
     private User user;
 
     /**
-     * The authenticated flag
+     * The authenticated flag.
      */
     private boolean authenticated = true;
 
     /**
-     * The user authentication constructor
+     * The user authentication constructor.
      *
      * @param user the user.
      */
@@ -53,9 +53,9 @@ public class UserAuthentication implements Authentication {
     }
 
     /**
-     * Get credentials
+     * Get credentials.
      *
-     * @return
+     * @return the credentials
      */
     @Override
     public Object getCredentials() {

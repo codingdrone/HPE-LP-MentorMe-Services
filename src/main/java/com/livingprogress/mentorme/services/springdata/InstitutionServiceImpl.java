@@ -8,6 +8,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
+
 /**
  * The Spring Data JPA implementation of InstitutionService, extends BaseService<Institution,InstitutionSearchCriteria>. Effectively thread safe after configuration.
  */
@@ -38,6 +40,8 @@ public class InstitutionServiceImpl extends BaseService<Institution, Institution
         super.handleNestedProperties(entity);
         if (entity.getContacts() != null) {
             entity.getContacts().forEach(c -> c.setInstitution(entity));
+        } else {
+            entity.setContacts(Collections.emptyList());
         }
     }
 }

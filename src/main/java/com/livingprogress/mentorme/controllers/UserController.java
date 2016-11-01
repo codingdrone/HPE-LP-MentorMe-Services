@@ -6,10 +6,10 @@ import com.livingprogress.mentorme.entities.Paging;
 import com.livingprogress.mentorme.entities.SearchResult;
 import com.livingprogress.mentorme.entities.User;
 import com.livingprogress.mentorme.entities.UserSearchCriteria;
+import com.livingprogress.mentorme.exceptions.AccessDeniedException;
 import com.livingprogress.mentorme.exceptions.ConfigurationException;
 import com.livingprogress.mentorme.exceptions.EntityNotFoundException;
 import com.livingprogress.mentorme.exceptions.MentorMeException;
-import com.livingprogress.mentorme.security.TokenHandler;
 import com.livingprogress.mentorme.services.UserService;
 import com.livingprogress.mentorme.utils.Helper;
 import lombok.NoArgsConstructor;
@@ -26,7 +26,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
-import javax.xml.bind.DatatypeConverter;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,8 +65,6 @@ public class UserController extends BaseEmailController {
      */
     @RequestMapping(value = "{id}", method = RequestMethod.GET)
     public User get(@PathVariable long id) throws MentorMeException {
-        TokenHandler tokenHandler = new TokenHandler(DatatypeConverter.parseBase64Binary("secret"));
-
         return userService.get(id);
     }
 
@@ -137,6 +134,7 @@ public class UserController extends BaseEmailController {
      * @param email the user email.
      * @throws IllegalArgumentException if email is null or empty or not email address
      * @throws EntityNotFoundException if the entity does not exist
+     * @throws AccessDeniedException if does not allow to perform action
      * @throws MentorMeException if any other error occurred during operation
      */
     @Transactional

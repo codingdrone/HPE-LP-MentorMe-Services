@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.livingprogress.mentorme.entities.IdentifiableEntity;
 import com.livingprogress.mentorme.entities.SearchResult;
+import com.livingprogress.mentorme.services.LookupService;
 import com.livingprogress.mentorme.utils.Helper;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
@@ -44,12 +45,12 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
  * The base test class for all tests.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(Application.class)
+@SpringApplicationConfiguration(classes ={Application.class})
+//@SpringApplicationConfiguration(classes ={Application.class, TestConfig.class})
 @WebAppConfiguration
 @EnableWebSecurity
 @TestPropertySource(locations = "classpath:test.properties")
 public abstract class BaseTest {
-
     /**
      * The sql folder.
      */
@@ -61,13 +62,19 @@ public abstract class BaseTest {
     private static final List<String> SQLS = Arrays.asList("clear.sql", "testdata.sql");
 
     /**
-     * The entity manager
+     * The lookup service used to perform operations.
+     */
+    @Autowired
+    protected LookupService lookupService;
+
+    /**
+     * The entity manager.
      */
     @Autowired
     protected EntityManager entityManager;
 
     /**
-     * The platform transaction manager
+     * The platform transaction manager.
      */
     @Autowired
     private PlatformTransactionManager txManager;
@@ -93,8 +100,7 @@ public abstract class BaseTest {
     /**
      * The object mapper.
      */
-    @Autowired
-    protected ObjectMapper objectMapper;
+    protected ObjectMapper objectMapper = TestConfig.buildObjectMapper();
 
     /**
      * The mock mvc object.
@@ -112,7 +118,7 @@ public abstract class BaseTest {
     protected Date sampleFutureDate;
 
     /**
-     * Setup test
+     * Setup test.
      *
      * @throws Exception throws if any error happen
      */
@@ -130,7 +136,7 @@ public abstract class BaseTest {
     }
 
     /**
-     * Tear down test
+     * Tear down test.
      *
      * @throws Exception throws if any error happen
      */
@@ -198,7 +204,7 @@ public abstract class BaseTest {
     }
 
     /**
-     * Get search result with reading content from url
+     * Get search result with reading content from url.
      *
      * @param url the url.
      * @param target the target class

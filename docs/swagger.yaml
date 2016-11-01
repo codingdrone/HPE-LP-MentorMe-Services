@@ -14,7 +14,6 @@ securityDefinitions:
   basicAuth:
     type: basic
 # HTTP Basic Authentication. Works over `HTTP` and `HTTPS`
-basePath: /v1
 produces:
   - application/json
 paths:

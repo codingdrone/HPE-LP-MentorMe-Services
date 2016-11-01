@@ -41,6 +41,17 @@ You may change  **spring.mail.port ** to different port but please make sure not
 so please not change **spring.mail.host** since it will listen **localhost**.
 
 
+### custom configurations using command line parameters or system variables
+Please check all property keys in `src/main/resources/application.properties`.
+You can custom using command line parameters or system variables easily.
+For example custom server port **-Dserver.port=8087** as command line parameter or using **set server.port=8087** under windows or **export SERVER_PORT=8087** under linux.
+similar for database,email related configurations.
+
+
+Details about order please check [Externalized Configuration](https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-external-config.html).
+For example if you define port in command line parameter and system variable at same time it will use command line parameter.
+
+
 ## Mysql setup 
 Create schemas with `sqls/schema.sql`.
 Create tables in above schemas with `sqls/ddl.sql`.
@@ -54,6 +65,12 @@ Make sure your configurations are right.
 
 ``` bash
 mvn clean test
+```
+
+You can also test with coverage report in `target/site/jacoco/index.html` after run below command.
+
+``` bash
+mvn clean test jacoco:report
 ```
 
 ## Deployment

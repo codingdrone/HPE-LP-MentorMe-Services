@@ -23,6 +23,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -217,10 +218,14 @@ public abstract class BaseService<T extends IdentifiableEntity, S> {
     protected <T extends InstitutionUser> void handleInstitutionUserNestedProperties(T entity) {
         if (entity.getPersonalInterests() != null) {
             entity.getPersonalInterests().forEach(p -> p.setUser(entity));
+        } else {
+            entity.setPersonalInterests(Collections.emptyList());
         }
 
         if (entity.getProfessionalInterests() != null) {
             entity.getProfessionalInterests().forEach(p -> p.setUser(entity));
+        } else {
+            entity.setProfessionalInterests(Collections.emptyList());
         }
     }
 

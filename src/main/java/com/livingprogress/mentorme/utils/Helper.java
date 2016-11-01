@@ -1,6 +1,7 @@
 package com.livingprogress.mentorme.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.livingprogress.mentorme.entities.IdentifiableEntity;
 import com.livingprogress.mentorme.entities.InstitutionAffiliationCode;
@@ -20,6 +21,7 @@ import com.livingprogress.mentorme.exceptions.ConfigurationException;
 import lombok.NoArgsConstructor;
 import org.apache.log4j.Logger;
 import org.hibernate.validator.internal.constraintvalidators.hv.EmailValidator;
+import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.ModelAndView;
@@ -65,7 +67,8 @@ public class Helper {
     /**
      * The object mapper.
      */
-    public static final ObjectMapper MAPPER = new ObjectMapper();
+    public static final ObjectMapper MAPPER = new Jackson2ObjectMapperBuilder()
+            .featuresToDisable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES).build();
 
     /**
      * Represents the utf8 encoding name.
@@ -304,8 +307,6 @@ public class Helper {
         boolean checkPassword = !isUpdating || rawPassword != null;
         if (checkPassword) {
             Helper.checkNullOrEmpty(rawPassword, "user.password");
-        }
-        if (checkPassword) {
             PasswordEncoder encoder = getPasswordEncoder();
             user.setPassword(encoder.encode(rawPassword));
         }
@@ -458,6 +459,16 @@ public class Helper {
         pd = Helper.buildInPredicate(criteria.getProfessionalInterests(), pd, root.join("professionalInterests", JoinType.LEFT).get("professionalInterest").get("id"), cb);
         pd = Helper.buildEqualPredicate(criteria.getAssignedToInstitution(), pd, root.get("assignedToInstitution"), cb);
         return pd;
+    }
+
+    /**
+     * Check whether entity list is null or empty.
+     *
+     * @param values the entity list.
+     * @return true if value has been updated.
+     */
+    public static <T extends IdentifiableEntity> boolean isNullOrEmptyList(List<T> values) {
+        return values == null || values.isEmpty();
     }
 
     /**

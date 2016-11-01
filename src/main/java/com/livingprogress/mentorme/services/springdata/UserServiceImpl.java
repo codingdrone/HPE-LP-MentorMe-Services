@@ -133,6 +133,7 @@ public class UserServiceImpl extends BaseService<User, UserSearchCriteria> imple
      * @return the created forgot password entity
      * @throws IllegalArgumentException if id is not positive
      * @throws EntityNotFoundException if the entity does not exist
+     * @throws AccessDeniedException if does not allow to perform action
      * @throws MentorMeException if any other error occurred during operation
      */
     @Transactional
@@ -173,7 +174,7 @@ public class UserServiceImpl extends BaseService<User, UserSearchCriteria> imple
                 User user = get(forgotPassword.getUserId());
                 Helper.encodePassword(user, false);
                 getRepository().save(user);
-                forgotPasswordRepository.delete(forgotPassword);
+                forgotPasswordRepository.deleteByUserId(forgotPassword.getUserId());
                 return true;
             }
         }

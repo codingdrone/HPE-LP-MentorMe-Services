@@ -1,10 +1,13 @@
 package com.livingprogress.mentorme.security;
 
 import com.livingprogress.mentorme.entities.User;
+import com.livingprogress.mentorme.exceptions.ConfigurationException;
+import com.livingprogress.mentorme.utils.Helper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -25,9 +28,10 @@ public class TokenAuthenticationService {
      */
     private static final String AUTH_COOKIE_NAME = "AUTH-TOKEN";
     /**
-     * The milliseconds for 10 days.
+     * The token expires in milliseconds for 10 days.
      */
-    private static long TEN_DAYS = 1000 * 60 * 60 * 24 * 10;
+    @Value("${token.expirationTimeInMillis}")
+    private long tokenExpirationTimeInMillis;
 
     /**
      * The token handler.
@@ -45,6 +49,17 @@ public class TokenAuthenticationService {
     }
 
     /**
+     * Check if all required fields are initialized properly.
+     *
+     * @throws ConfigurationException if any required field is not initialized properly.
+     */
+    @PostConstruct
+    protected void checkConfiguration() {
+        Helper.checkConfigNotNull(tokenHandler, "tokenHandler");
+        Helper.checkConfigPositive(tokenExpirationTimeInMillis, "tokenExpirationTimeInMillis");
+    }
+
+    /**
      * Add authentication.
      *
      * @param response the servlet response.
@@ -52,7 +67,7 @@ public class TokenAuthenticationService {
      */
     public void addAuthentication(HttpServletResponse response, UserAuthentication authentication) {
         final User user = (User) authentication.getDetails();
-        user.setExpires(System.currentTimeMillis() + TEN_DAYS);
+        user.setExpires(System.currentTimeMillis() + tokenExpirationTimeInMillis);
         final String token = tokenHandler.createTokenForUser(user);
         // Put the token into a cookie because the client can't capture response
         // headers of redirects / full page reloads.

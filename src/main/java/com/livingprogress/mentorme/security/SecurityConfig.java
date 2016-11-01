@@ -109,10 +109,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             .antMatchers("/").permitAll()
-                //allow anonymous for lookup requests
+                //allow anonymous for lookup,forgot password, update password requests
                 .antMatchers("/favicon.ico")
                 .permitAll()
                 .antMatchers("/lookups/**")
+                .permitAll()
+                .antMatchers("/users/forgotPassword")
+                .permitAll()
+                .antMatchers("/users/updatePassword")
                 .permitAll()
                 .antMatchers(POST, "/users")
                 .hasAuthority("SYSTEM_ADMIN")

@@ -5,6 +5,7 @@ import com.livingprogress.mentorme.entities.Event;
 import com.livingprogress.mentorme.entities.IdentifiableEntity;
 import com.livingprogress.mentorme.entities.Institution;
 import com.livingprogress.mentorme.entities.InstitutionAffiliationCode;
+import com.livingprogress.mentorme.entities.InstitutionContact;
 import com.livingprogress.mentorme.entities.SearchResult;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
@@ -18,8 +19,11 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertArrayEquals;
@@ -134,6 +138,50 @@ public class InstitutionControllerTest extends BaseTest {
         assertEquals(1, result.getContacts().get(0).getId());
         verifyEntities(demoEntity.getContacts(), result.getContacts());
         assertEquals(objectMapper.writeValueAsString(demoEntity), objectMapper.writeValueAsString(result));
+        // test nested properties
+        demoEntity.setContacts(null);
+        mockMvc.perform(MockMvcRequestBuilders.put("/institutions/1")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.contacts", Matchers.hasSize(0)));
+        // second null updates
+        mockMvc.perform(MockMvcRequestBuilders.put("/institutions/1")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.contacts", Matchers.hasSize(0)));
+        // empty list
+        demoEntity.setContacts(Collections.emptyList());
+        mockMvc.perform(MockMvcRequestBuilders.put("/institutions/1")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.contacts", Matchers.hasSize(0)));
+        demoEntity.setContacts(new ArrayList<>());
+        int contactCount = 3;
+        IntStream.range(0, contactCount).forEach(idx -> {
+            InstitutionContact contact = new InstitutionContact();
+            contact.setEmail("test" + idx + "@test.com");
+            contact.setFirstName("first" + idx);
+            contact.setLastName("last" + idx);
+            contact.setPhoneNumber("phone" + idx);
+            contact.setTitle("title" + idx);
+            demoEntity.getContacts().add(contact);
+        });
+        mockMvc.perform(MockMvcRequestBuilders.put("/institutions/1")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.contacts", Matchers.hasSize(contactCount)));
     }
 
     /**
@@ -288,13 +336,15 @@ public class InstitutionControllerTest extends BaseTest {
         CriteriaQuery<InstitutionAffiliationCode> query = cb.createQuery(InstitutionAffiliationCode.class);
         Root<InstitutionAffiliationCode> root = query.from(InstitutionAffiliationCode.class);
         query.select(root)
-             .where(cb.equal(root.get("code"), code));
+             .where(cb.equal(root.get("code"), objectMapper.readValue(code, String.class)));
         TypedQuery<InstitutionAffiliationCode> q = entityManager.createQuery(query);
         List<InstitutionAffiliationCode> list = q.getResultList();
         assertEquals(1, list.size());
         InstitutionAffiliationCode entity = list.get(0);
         assertEquals(1, entity.getInstitutionId());
         assertFalse(entity.isUsed());
+        mockMvc.perform(MockMvcRequestBuilders.put("/institutions/999/generateAffiliationCode"))
+               .andExpect(status().isNotFound());
     }
 
     /**
@@ -314,6 +364,10 @@ public class InstitutionControllerTest extends BaseTest {
         InstitutionAffiliationCode entity = getInstitutionAffiliationCode(code);
         assertEquals(1, entity.getInstitutionId());
         assertFalse(entity.isUsed());
+        mockMvc.perform(MockMvcRequestBuilders.get("/institutions/affiliationCode/notexist")
+                                              .accept(MediaType.APPLICATION_JSON))
+               .andExpect(status().isOk())
+               .andExpect(content().string(""));
     }
 
     /**
@@ -331,6 +385,9 @@ public class InstitutionControllerTest extends BaseTest {
         InstitutionAffiliationCode entity = getInstitutionAffiliationCode(code);
         assertEquals(1, entity.getInstitutionId());
         assertTrue(entity.isUsed());
+        mockMvc.perform(MockMvcRequestBuilders.put("/institutions/useAffiliationCode?affiliationCode=notexist")
+                                              .accept(MediaType.APPLICATION_JSON))
+               .andExpect(status().isNotFound());
     }
 
     /**
@@ -349,7 +406,10 @@ public class InstitutionControllerTest extends BaseTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/institutions/1/summary")
                                               .accept(MediaType.APPLICATION_JSON))
                .andExpect(status().isOk())
-               .andExpect(content().string(summary));
+               .andExpect(content().json(summary));
+        mockMvc.perform(MockMvcRequestBuilders.get("/institutions/999/summary")
+                                              .accept(MediaType.APPLICATION_JSON))
+               .andExpect(status().isNotFound());
     }
 
     /**

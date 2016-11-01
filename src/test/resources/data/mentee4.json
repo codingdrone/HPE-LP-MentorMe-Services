@@ -1,6 +1,6 @@
 {
   "id": 4,
-  "createdOn": 1475510400000,
+  "createdOn": "2016-10-04T00:00:00",
   "username": "test4",
   "firstName": "firstname4",
   "lastName": "lastname4",
@@ -15,7 +15,7 @@
   "status": "ACTIVE",
   "institution": {
     "id": 1,
-    "createdOn": 1475251200000,
+    "createdOn": "2016-10-01T00:00:00",
     "institutionName": "institutionName1",
     "parentOrganization": "parentOrganization1",
     "streetAddress": "streetAddress1",

@@ -5,8 +5,12 @@ import com.livingprogress.mentorme.BaseTest;
 import com.livingprogress.mentorme.entities.IdentifiableEntity;
 import com.livingprogress.mentorme.entities.Mentee;
 import com.livingprogress.mentorme.entities.ParentConsent;
+import com.livingprogress.mentorme.entities.PersonalInterest;
+import com.livingprogress.mentorme.entities.ProfessionalInterest;
 import com.livingprogress.mentorme.entities.SearchResult;
 import com.livingprogress.mentorme.entities.UserStatus;
+import com.livingprogress.mentorme.entities.WeightedPersonalInterest;
+import com.livingprogress.mentorme.entities.WeightedProfessionalInterest;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -14,12 +18,15 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -123,6 +130,12 @@ public class MenteeControllerTest extends BaseTest {
      */
     @Test
     public void update() throws Exception {
+        // no updates
+        mockMvc.perform(MockMvcRequestBuilders.put("/mentees/4")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(sample))
+               .andExpect(status().isOk())
+               .andExpect(content().json(sample));
         Mentee demoEntity = objectMapper.readValue(demo, Mentee.class);
         checkEntities(demoEntity.getPersonalInterests());
         checkEntities(demoEntity.getProfessionalInterests());
@@ -169,6 +182,65 @@ public class MenteeControllerTest extends BaseTest {
         verifyEntity(demoEntity.getParentConsent(), result.getParentConsent());
         verifyEntity(demoEntity.getInstitutionAffiliationCode(), result.getInstitutionAffiliationCode());
         assertEquals(objectMapper.writeValueAsString(demoEntity), objectMapper.writeValueAsString(result));
+        // test nested properties
+        demoEntity.setParentConsent(null);
+        demoEntity.setPersonalInterests(null);
+        demoEntity.setProfessionalInterests(null);
+        mockMvc.perform(MockMvcRequestBuilders.put("/mentees/4")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.parentConsent").doesNotExist())
+               .andExpect(jsonPath("$.personalInterests", Matchers.hasSize(0)))
+               .andExpect(jsonPath("$.professionalInterests", Matchers.hasSize(0)));
+        // second null updates
+        mockMvc.perform(MockMvcRequestBuilders.put("/mentees/4")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.parentConsent").doesNotExist())
+               .andExpect(jsonPath("$.personalInterests", Matchers.hasSize(0)))
+               .andExpect(jsonPath("$.professionalInterests", Matchers.hasSize(0)));
+        // update with new nested values
+        List<PersonalInterest> personalInterests = lookupService.getPersonalInterests();
+        assertTrue(personalInterests.size() > 0);
+        demoEntity.setPersonalInterests(personalInterests.stream()
+                                                         .map(p -> {
+                                                             WeightedPersonalInterest weightedPersonalInterest = new
+                                                                     WeightedPersonalInterest();
+                                                             weightedPersonalInterest.setPersonalInterest(p);
+                                                             weightedPersonalInterest.setWeight(1);
+                                                             return weightedPersonalInterest;
+                                                         })
+                                                         .collect(Collectors.toList()));
+        List<ProfessionalInterest> professionalInterests = lookupService.getProfessionalInterests();
+        assertTrue(professionalInterests.size() > 0);
+        demoEntity.setProfessionalInterests(professionalInterests.stream()
+                                                                 .map(p -> {
+                                                                     WeightedProfessionalInterest
+                                                                            weightedProfessionalInterest = new
+                                                                             WeightedProfessionalInterest();
+                                                                     weightedProfessionalInterest.setProfessionalInterest(p);
+                                                                     weightedProfessionalInterest.setWeight(1);
+                                                                     return weightedProfessionalInterest;
+                                                                 })
+                                                                 .collect(Collectors.toList()));
+        mockMvc.perform(MockMvcRequestBuilders.put("/mentees/4")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.parentConsent").doesNotExist())
+               .andExpect(jsonPath("$.personalInterests", Matchers.hasSize(personalInterests.size())))
+               .andExpect(jsonPath("$.professionalInterests", Matchers.hasSize(professionalInterests.size())));
     }
 
     /**
@@ -337,6 +409,8 @@ public class MenteeControllerTest extends BaseTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/mentees/4/averageScore"))
                .andExpect(status().isOk())
                .andExpect(content().string(readFile("mentee4AverageScore.txt")));
+        mockMvc.perform(MockMvcRequestBuilders.get("/mentees/999/averageScore"))
+               .andExpect(status().isNotFound());
     }
 
     /**
@@ -349,6 +423,8 @@ public class MenteeControllerTest extends BaseTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/mentees/4/matchingMentors"))
                .andExpect(status().isOk())
                .andExpect(content().json(readFile("mentee4MatchingMentors.json")));
+        mockMvc.perform(MockMvcRequestBuilders.get("/mentees/999/matchingMentors"))
+               .andExpect(status().isNotFound());
     }
 
     /**

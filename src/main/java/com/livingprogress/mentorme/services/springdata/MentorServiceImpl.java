@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -62,6 +63,8 @@ public class MentorServiceImpl extends BaseService<Mentor, MentorSearchCriteria>
         super.handleInstitutionUserNestedProperties(entity);
         if (entity.getProfessionalExperiences() != null) {
             entity.getProfessionalExperiences().forEach(p -> p.setMentor(entity));
+        } else {
+            entity.setProfessionalExperiences(Collections.emptyList());
         }
     }
 

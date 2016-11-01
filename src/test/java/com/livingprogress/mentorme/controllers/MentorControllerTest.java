@@ -3,20 +3,32 @@ package com.livingprogress.mentorme.controllers;
 import com.livingprogress.mentorme.BaseTest;
 import com.livingprogress.mentorme.entities.IdentifiableEntity;
 import com.livingprogress.mentorme.entities.Mentor;
+import com.livingprogress.mentorme.entities.PersonalInterest;
+import com.livingprogress.mentorme.entities.ProfessionalConsultantArea;
+import com.livingprogress.mentorme.entities.ProfessionalExperienceData;
+import com.livingprogress.mentorme.entities.ProfessionalInterest;
 import com.livingprogress.mentorme.entities.SearchResult;
+import com.livingprogress.mentorme.entities.WeightedPersonalInterest;
+import com.livingprogress.mentorme.entities.WeightedProfessionalInterest;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -105,6 +117,12 @@ public class MentorControllerTest extends BaseTest {
      */
     @Test
     public void update() throws Exception {
+        // no updates
+        mockMvc.perform(MockMvcRequestBuilders.put("/mentors/3")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(sample))
+               .andExpect(status().isOk())
+               .andExpect(content().json(sample));
         Mentor demoEntity = objectMapper.readValue(demo, Mentor.class);
         checkEntities(demoEntity.getPersonalInterests());
         checkEntities(demoEntity.getProfessionalExperiences());
@@ -151,6 +169,83 @@ public class MentorControllerTest extends BaseTest {
         verifyEntities(demoEntity.getProfessionalExperiences(), result.getProfessionalExperiences());
         verifyEntities(demoEntity.getProfessionalInterests(), result.getProfessionalInterests());
         assertEquals(objectMapper.writeValueAsString(demoEntity), objectMapper.writeValueAsString(result));
+        // test nested properties
+        demoEntity.setPersonalInterests(null);
+        demoEntity.setProfessionalInterests(null);
+        demoEntity.setProfessionalAreas(null);
+        demoEntity.setProfessionalExperiences(null);
+        mockMvc.perform(MockMvcRequestBuilders.put("/mentors/3")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.personalInterests", Matchers.hasSize(0)))
+               .andExpect(jsonPath("$.professionalInterests", Matchers.hasSize(0)))
+               .andExpect(jsonPath("$.professionalExperiences", Matchers.hasSize(0)))
+               .andExpect(jsonPath("$.professionalAreas").doesNotExist());
+        // second null updates
+        mockMvc.perform(MockMvcRequestBuilders.put("/mentors/3")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.personalInterests", Matchers.hasSize(0)))
+               .andExpect(jsonPath("$.professionalInterests", Matchers.hasSize(0)))
+               .andExpect(jsonPath("$.professionalExperiences", Matchers.hasSize(0)))
+               .andExpect(jsonPath("$.professionalAreas", Matchers.hasSize(0)));
+        // update with new nested values
+        List<PersonalInterest> personalInterests = lookupService.getPersonalInterests();
+        assertTrue(personalInterests.size() > 0);
+        demoEntity.setPersonalInterests(personalInterests.stream()
+                                                         .map(p -> {
+                                                             WeightedPersonalInterest weightedPersonalInterest = new
+                                                                     WeightedPersonalInterest();
+                                                             weightedPersonalInterest.setPersonalInterest(p);
+                                                             weightedPersonalInterest.setWeight(1);
+                                                             return weightedPersonalInterest;
+                                                         })
+                                                         .collect(Collectors.toList()));
+        List<ProfessionalInterest> professionalInterests = lookupService.getProfessionalInterests();
+        assertTrue(professionalInterests.size() > 0);
+        demoEntity.setProfessionalInterests(professionalInterests.stream()
+                                                                 .map(p -> {
+                                                                     WeightedProfessionalInterest
+                                                                             weightedProfessionalInterest = new
+                                                                             WeightedProfessionalInterest();
+                                                                     weightedProfessionalInterest.setProfessionalInterest(p);
+                                                                     weightedProfessionalInterest.setWeight(1);
+                                                                     return weightedProfessionalInterest;
+                                                                 })
+                                                                 .collect(Collectors.toList()));
+        List<ProfessionalConsultantArea>  areas = lookupService.getProfessionalConsultantAreas();
+        assertTrue(areas.size() > 0);
+        demoEntity.setProfessionalAreas(areas);
+        int count = 3;
+        demoEntity.setProfessionalExperiences(new ArrayList<>());
+        IntStream.range(0, count).forEach(idx -> {
+            ProfessionalExperienceData data= new ProfessionalExperienceData();
+            data.setPosition("position" + idx);
+            data.setWorkLocation("workLocation" + idx);
+            data.setDescription("description" + idx);
+            data.setStartDate(new Date());
+            data.setEndDate(new Date());
+            demoEntity.getProfessionalExperiences().add(data);
+        });
+        mockMvc.perform(MockMvcRequestBuilders.put("/mentors/3")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.personalInterests", Matchers.hasSize(personalInterests.size())))
+               .andExpect(jsonPath("$.professionalInterests", Matchers.hasSize(professionalInterests.size())))
+               .andExpect(jsonPath("$.professionalExperiences", Matchers.hasSize(count)))
+               .andExpect(jsonPath("$.professionalAreas", Matchers.hasSize(areas.size())));
     }
 
     /**
@@ -335,6 +430,8 @@ public class MentorControllerTest extends BaseTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/mentors/3/averageScore"))
                .andExpect(status().isOk())
                .andExpect(content().string(readFile("mentor3AverageScore.txt")));
+        mockMvc.perform(MockMvcRequestBuilders.get("/mentors/999/averageScore"))
+               .andExpect(status().isNotFound());
     }
 
     /**
@@ -347,6 +444,8 @@ public class MentorControllerTest extends BaseTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/mentors/3/matchingMentees"))
                .andExpect(status().isOk())
                .andExpect(content().json(readFile("mentor3MatchingMentees.json")));
+        mockMvc.perform(MockMvcRequestBuilders.get("/mentors/999/matchingMentees"))
+               .andExpect(status().isNotFound());
     }
 
     /**

@@ -20,9 +20,15 @@ import java.util.Map;
 @EnableWebMvc
 @ControllerAdvice
 public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
+
+    /**
+     * Handle controller exception.
+     * @param exception the exception.
+     * @return the error response entity.
+     */
     @ExceptionHandler(Throwable.class)
     @ResponseBody
-    ResponseEntity<Object> handleControllerException(Throwable exception) {
+    public ResponseEntity<Object> handleControllerException(Throwable exception) {
         exception.printStackTrace();
         HttpStatus status;
         if (exception instanceof IllegalArgumentException) {
@@ -37,11 +43,25 @@ public class ServiceExceptionHandler extends ResponseEntityExceptionHandler {
         return buildErrorResponse(status, exception);
     }
 
+    /**
+     * Handle no handler found exception.
+     * @param ex the exception.
+     * @param headers the http header.
+     * @param status the http status
+     * @param request the web request.
+     * @return the error response entity
+     */
     @Override
     protected ResponseEntity<Object> handleNoHandlerFoundException(NoHandlerFoundException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
         return buildErrorResponse(status, ex);
     }
 
+    /**
+     * Build error response.
+     * @param status the http status.
+     * @param ex the exception.
+     * @return the error response entity with code and message.
+     */
     private static ResponseEntity<Object> buildErrorResponse(HttpStatus status, Throwable ex){
         Map<String,Object> responseBody = new HashMap<>();
         responseBody.put("code", status.value());

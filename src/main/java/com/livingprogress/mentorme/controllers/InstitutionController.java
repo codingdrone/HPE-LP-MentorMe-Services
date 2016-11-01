@@ -228,6 +228,7 @@ public class InstitutionController {
      *
      * @param affiliationCode the affiliation code
      * @throws IllegalArgumentException if affiliation code is null or empty
+     * @throws EntityNotFoundException if the entity does not exist
      * @throws MentorMeException if any other error occurred during operation
      */
     @Transactional
@@ -237,6 +238,8 @@ public class InstitutionController {
         if (ac != null && !ac.isUsed()) {
             ac.setUsed(true);
             institutionAffiliationCodeService.update(ac.getId(), ac);
+        } else {
+            throw new EntityNotFoundException("AffiliationCode with code=" + affiliationCode + " can not be found.");
         }
     }
 

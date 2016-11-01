@@ -4,7 +4,7 @@
   "entities": [
     {
       "id": 4,
-      "createdOn": 1475510400000,
+      "createdOn": "2016-10-04T00:00:00",
       "username": "test4",
       "firstName": "firstname4",
       "lastName": "lastname4",
@@ -19,7 +19,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -149,7 +149,7 @@
     },
     {
       "id": 10,
-      "createdOn": 1476028800000,
+      "createdOn": "2016-10-10T00:00:00",
       "username": "test10",
       "firstName": "firstname10",
       "lastName": "lastname10",
@@ -164,7 +164,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 2,
-        "createdOn": 1475337600000,
+        "createdOn": "2016-10-02T00:00:00",
         "institutionName": "institutionName2",
         "parentOrganization": null,
         "streetAddress": "streetAddress2",
@@ -251,7 +251,7 @@
     },
     {
       "id": 11,
-      "createdOn": 1476115200000,
+      "createdOn": "2016-10-11T00:00:00",
       "username": "test11",
       "firstName": "firstname11",
       "lastName": "lastname11",
@@ -266,7 +266,7 @@
       "status": "INACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -345,7 +345,7 @@
     },
     {
       "id": 12,
-      "createdOn": 1476201600000,
+      "createdOn": "2016-10-12T00:00:00",
       "username": "test12",
       "firstName": "firstname12",
       "lastName": "lastname12",
@@ -360,7 +360,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 4,
-        "createdOn": 1475510400000,
+        "createdOn": "2016-10-04T00:00:00",
         "institutionName": "institutionName4",
         "parentOrganization": "parentOrganization4",
         "streetAddress": "streetAddress4",
@@ -420,7 +420,7 @@
     },
     {
       "id": 13,
-      "createdOn": 1476288000000,
+      "createdOn": "2016-10-13T00:00:00",
       "username": "test13",
       "firstName": "firstname13",
       "lastName": "lastname13",
@@ -435,7 +435,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -514,7 +514,7 @@
     },
     {
       "id": 14,
-      "createdOn": 1476374400000,
+      "createdOn": "2016-10-14T00:00:00",
       "username": "test14",
       "firstName": "firstname14",
       "lastName": "lastname14",
@@ -529,7 +529,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 6,
-        "createdOn": 1475683200000,
+        "createdOn": "2016-10-06T00:00:00",
         "institutionName": "institutionName6",
         "parentOrganization": "parentOrganization6",
         "streetAddress": "streetAddress6",

@@ -6,10 +6,13 @@ import com.livingprogress.mentorme.entities.IdentifiableEntity;
 import com.livingprogress.mentorme.entities.NewPassword;
 import com.livingprogress.mentorme.entities.SearchResult;
 import com.livingprogress.mentorme.entities.User;
+import com.livingprogress.mentorme.entities.UserRole;
+import com.livingprogress.mentorme.services.LookupService;
 import org.hamcrest.Matchers;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
@@ -22,6 +25,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -104,6 +108,12 @@ public class UserControllerTest extends BaseTest {
      */
     @Test
     public void update() throws Exception {
+        // no updates
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/1")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(sample))
+               .andExpect(status().isOk())
+               .andExpect(content().json(sample));
         User sampleEntity = objectMapper.readValue(sample, User.class);
         User demoEntity = objectMapper.readValue(demo, User.class);
         BeanUtils.copyProperties(demoEntity, sampleEntity);
@@ -126,6 +136,37 @@ public class UserControllerTest extends BaseTest {
         assertNotEquals(sampleFutureDate, result.getCreatedOn());
         demoEntity.setCreatedOn(result.getCreatedOn());
         assertEquals(objectMapper.writeValueAsString(demoEntity), objectMapper.writeValueAsString(result));
+        // test nested properties
+        demoEntity.setRoles(null);
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/1")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.roles").doesNotExist());
+        // second null updates
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/1")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.roles", Matchers.hasSize(0)));
+        // update with new nested values
+        List<UserRole> roles = lookupService.getUserRoles();
+        demoEntity.setRoles(roles);
+        assertTrue(roles.size() > 0);
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/1")
+                                              .contentType(MediaType.APPLICATION_JSON)
+                                              .content(objectMapper.writeValueAsString(demoEntity)))
+               .andExpect(status().isOk())
+               .andExpect(jsonPath("$.password").doesNotExist())
+               .andExpect(jsonPath("$.id").isNumber())
+               .andExpect(jsonPath("$.createdOn").exists())
+               .andExpect(jsonPath("$.roles", Matchers.hasSize(roles.size())));
     }
 
     /**
@@ -264,6 +305,12 @@ public class UserControllerTest extends BaseTest {
         assertEquals(1, forgotPassword.getUserId());
         assertNotNull(forgotPassword.getExpiredOn());
         verifyEmail("Reset password", forgotPassword.getToken(), email);
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/forgotPassword?email=" + email))
+               .andExpect(status().isOk());
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/forgotPassword?email=" + email))
+               .andExpect(status().isForbidden());
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/forgotPassword?email=notexist@test.com"))
+               .andExpect(status().isNotFound());
     }
 
     /**
@@ -282,6 +329,9 @@ public class UserControllerTest extends BaseTest {
         forgotPassword.setExpiredOn(sampleFutureDate);
         entityManager.persist(forgotPassword);
         assertEquals(1, getForgotPasswords().size());
+        mockMvc.perform(MockMvcRequestBuilders.put("/users/forgotPassword?email=email1@test.com"))
+               .andExpect(status().isOk());
+        assertEquals(2, getForgotPasswords().size());
         NewPassword entity = new NewPassword();
         entity.setToken(token);
         entity.setNewPassword(newPassword);

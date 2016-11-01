@@ -4,7 +4,7 @@
   "entities": [
     {
       "id": 1,
-      "createdOn": 1475251200000,
+      "createdOn": "2016-10-01T00:00:00",
       "username": "test1",
       "firstName": "firstname1",
       "lastName": "lastname1",
@@ -20,7 +20,7 @@
     },
     {
       "id": 2,
-      "createdOn": 1475337600000,
+      "createdOn": "2016-10-02T00:00:00",
       "username": "test2",
       "firstName": "firstname2",
       "lastName": "lastname2",
@@ -36,7 +36,7 @@
     },
     {
       "id": 3,
-      "createdOn": 1475424000000,
+      "createdOn": "2016-10-03T00:00:00",
       "username": "test3",
       "firstName": "firstname3",
       "lastName": "lastname3",
@@ -51,7 +51,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -198,7 +198,7 @@
     },
     {
       "id": 4,
-      "createdOn": 1475510400000,
+      "createdOn": "2016-10-04T00:00:00",
       "username": "test4",
       "firstName": "firstname4",
       "lastName": "lastname4",
@@ -213,7 +213,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -343,7 +343,7 @@
     },
     {
       "id": 5,
-      "createdOn": 1475596800000,
+      "createdOn": "2016-10-05T00:00:00",
       "username": "test5",
       "firstName": "firstname5",
       "lastName": "lastname5",
@@ -358,7 +358,7 @@
       "status": "INACTIVE",
       "institution": {
         "id": 2,
-        "createdOn": 1475337600000,
+        "createdOn": "2016-10-02T00:00:00",
         "institutionName": "institutionName2",
         "parentOrganization": null,
         "streetAddress": "streetAddress2",
@@ -440,7 +440,7 @@
     },
     {
       "id": 6,
-      "createdOn": 1475683200000,
+      "createdOn": "2016-10-06T00:00:00",
       "username": "test6",
       "firstName": "firstname6",
       "lastName": "lastname6",
@@ -455,7 +455,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -529,7 +529,7 @@
     },
     {
       "id": 7,
-      "createdOn": 1475769600000,
+      "createdOn": "2016-10-07T00:00:00",
       "username": "test7",
       "firstName": "firstname7",
       "lastName": "lastname7",
@@ -544,7 +544,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 4,
-        "createdOn": 1475510400000,
+        "createdOn": "2016-10-04T00:00:00",
         "institutionName": "institutionName4",
         "parentOrganization": "parentOrganization4",
         "streetAddress": "streetAddress4",
@@ -616,7 +616,7 @@
     },
     {
       "id": 8,
-      "createdOn": 1475856000000,
+      "createdOn": "2016-10-08T00:00:00",
       "username": "test8",
       "firstName": "firstname8",
       "lastName": "lastname8",
@@ -631,7 +631,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -700,7 +700,7 @@
     },
     {
       "id": 9,
-      "createdOn": 1475942400000,
+      "createdOn": "2016-10-09T00:00:00",
       "username": "test9",
       "firstName": "firstname9",
       "lastName": "lastname9",
@@ -715,7 +715,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 6,
-        "createdOn": 1475683200000,
+        "createdOn": "2016-10-06T00:00:00",
         "institutionName": "institutionName6",
         "parentOrganization": "parentOrganization6",
         "streetAddress": "streetAddress6",
@@ -765,7 +765,7 @@
     },
     {
       "id": 10,
-      "createdOn": 1476028800000,
+      "createdOn": "2016-10-10T00:00:00",
       "username": "test10",
       "firstName": "firstname10",
       "lastName": "lastname10",
@@ -780,7 +780,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 2,
-        "createdOn": 1475337600000,
+        "createdOn": "2016-10-02T00:00:00",
         "institutionName": "institutionName2",
         "parentOrganization": null,
         "streetAddress": "streetAddress2",
@@ -867,7 +867,7 @@
     },
     {
       "id": 11,
-      "createdOn": 1476115200000,
+      "createdOn": "2016-10-11T00:00:00",
       "username": "test11",
       "firstName": "firstname11",
       "lastName": "lastname11",
@@ -882,7 +882,7 @@
       "status": "INACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -961,7 +961,7 @@
     },
     {
       "id": 12,
-      "createdOn": 1476201600000,
+      "createdOn": "2016-10-12T00:00:00",
       "username": "test12",
       "firstName": "firstname12",
       "lastName": "lastname12",
@@ -976,7 +976,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 4,
-        "createdOn": 1475510400000,
+        "createdOn": "2016-10-04T00:00:00",
         "institutionName": "institutionName4",
         "parentOrganization": "parentOrganization4",
         "streetAddress": "streetAddress4",
@@ -1036,7 +1036,7 @@
     },
     {
       "id": 13,
-      "createdOn": 1476288000000,
+      "createdOn": "2016-10-13T00:00:00",
       "username": "test13",
       "firstName": "firstname13",
       "lastName": "lastname13",
@@ -1051,7 +1051,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 1,
-        "createdOn": 1475251200000,
+        "createdOn": "2016-10-01T00:00:00",
         "institutionName": "institutionName1",
         "parentOrganization": "parentOrganization1",
         "streetAddress": "streetAddress1",
@@ -1130,7 +1130,7 @@
     },
     {
       "id": 14,
-      "createdOn": 1476374400000,
+      "createdOn": "2016-10-14T00:00:00",
       "username": "test14",
       "firstName": "firstname14",
       "lastName": "lastname14",
@@ -1145,7 +1145,7 @@
       "status": "ACTIVE",
       "institution": {
         "id": 6,
-        "createdOn": 1475683200000,
+        "createdOn": "2016-10-06T00:00:00",
         "institutionName": "institutionName6",
         "parentOrganization": "parentOrganization6",
         "streetAddress": "streetAddress6",
